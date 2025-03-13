@@ -1,0 +1,19 @@
+{
+    "kind": "singleType",
+    "collectionName": "project_pages",
+    "info": {
+        "singularName": "project-page",
+        "pluralName": "project-pages",
+        "displayName": "ProjectPage"
+    },
+    "options": {
+        "draftAndPublish": true
+    },
+    "attributes": {
+        "BreadCrumb": {
+            "type": "component",
+            "repeatable": false,
+            "component": "page-component.breadcrumb1"
+        }
+    }
+}

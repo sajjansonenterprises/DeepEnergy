@@ -1,0 +1,45 @@
+{
+    "collectionName": "components_page_component_abouts",
+    "info": {
+        "displayName": "about",
+        "icon": "information",
+        "description": ""
+    },
+    "options": {},
+    "attributes": {
+        "happyClient": {
+            "type": "string"
+        },
+        "title": {
+            "type": "string"
+        },
+        "heading": {
+            "type": "text"
+        },
+        "whoWeAre": {
+            "type": "text"
+        },
+        "ourMission": {
+            "type": "text"
+        },
+        "ourVission": {
+            "type": "string"
+        },
+        "whyChooseUs": {
+            "type": "string"
+        },
+        "readMoreUrl": {
+            "type": "string"
+        },
+        "image": {
+            "allowedTypes": [
+                "images",
+                "files",
+                "videos",
+                "audios"
+            ],
+            "type": "media",
+            "multiple": false
+        }
+    }
+}

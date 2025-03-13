@@ -1,0 +1,31 @@
+{
+    "kind": "collectionType",
+    "collectionName": "pages",
+    "info": {
+        "singularName": "page",
+        "pluralName": "pages",
+        "displayName": "Page",
+        "description": ""
+    },
+    "options": {
+        "draftAndPublish": true
+    },
+    "attributes": {
+        "title": {
+            "type": "string"
+        },
+        "slug": {
+            "type": "uid",
+            "targetField": "title"
+        },
+        "PageCode": {
+            "type": "richtext"
+        },
+        "metaTags": {
+            "type": "string"
+        },
+        "metaDescription": {
+            "type": "string"
+        }
+    }
+}

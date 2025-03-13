@@ -1,0 +1,21 @@
+{
+    "collectionName": "components_page_component_projects",
+    "info": {
+        "displayName": "Project",
+        "description": ""
+    },
+    "options": {},
+    "attributes": {
+        "title": {
+            "type": "string"
+        },
+        "heading": {
+            "type": "string"
+        },
+        "projects": {
+            "type": "relation",
+            "relation": "oneToMany",
+            "target": "api::project.project"
+        }
+    }
+}
