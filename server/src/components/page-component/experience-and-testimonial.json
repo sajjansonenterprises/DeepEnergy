@@ -1,0 +1,33 @@
+{
+  "collectionName": "components_page_component_experience_and_testimonials",
+  "info": {
+    "displayName": "ExperienceAndTestimonial"
+  },
+  "options": {},
+  "attributes": {
+    "image": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": false
+    },
+    "ExpYear": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string"
+    },
+    "Heading": {
+      "type": "string"
+    },
+    "testimonials": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::testimonial.testimonial"
+    }
+  }
+}
