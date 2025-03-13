@@ -1,0 +1,13 @@
+{
+    "collectionName": "components_pagesetting_paths",
+    "info": {
+        "displayName": "path",
+        "icon": "link"
+    },
+    "options": {},
+    "attributes": {
+        "path": {
+            "type": "string"
+        }
+    }
+}

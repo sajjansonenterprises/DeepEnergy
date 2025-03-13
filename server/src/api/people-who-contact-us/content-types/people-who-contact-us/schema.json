@@ -1,0 +1,27 @@
+{
+  "kind": "collectionType",
+  "collectionName": "people_who_contact_uses",
+  "info": {
+    "singularName": "people-who-contact-us",
+    "pluralName": "people-who-contact-uses",
+    "displayName": "People_Who_Contact_Us",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "Name": {
+      "type": "string"
+    },
+    "Email": {
+      "type": "email"
+    },
+    "PhoneNumber": {
+      "type": "string"
+    },
+    "Message": {
+      "type": "text"
+    }
+  }
+}

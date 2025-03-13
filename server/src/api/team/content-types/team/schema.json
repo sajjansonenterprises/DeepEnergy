@@ -1,0 +1,24 @@
+{
+  "kind": "collectionType",
+  "collectionName": "teams",
+  "info": {
+    "singularName": "team",
+    "pluralName": "teams",
+    "displayName": "Team",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "team": {
+      "displayName": "card1",
+      "type": "component",
+      "repeatable": false,
+      "component": "page-component.card1"
+    },
+    "Name": {
+      "type": "string"
+    }
+  }
+}
