@@ -1,0 +1,16 @@
+{
+    "collectionName": "components_pagesetting_dropdowns",
+    "info": {
+        "displayName": "dropdown",
+        "icon": "arrowDown"
+    },
+    "options": {},
+    "attributes": {
+        "name": {
+            "type": "string"
+        },
+        "path": {
+            "type": "string"
+        }
+    }
+}

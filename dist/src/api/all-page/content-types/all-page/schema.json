@@ -1,0 +1,20 @@
+{
+    "kind": "singleType",
+    "collectionName": "all_pages",
+    "info": {
+        "singularName": "all-page",
+        "pluralName": "all-pages",
+        "displayName": "All Page",
+        "description": ""
+    },
+    "options": {
+        "draftAndPublish": true
+    },
+    "attributes": {
+        "Home": {
+            "type": "component",
+            "repeatable": false,
+            "component": "all-page.all-page"
+        }
+    }
+}

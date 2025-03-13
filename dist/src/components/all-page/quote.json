@@ -1,0 +1,54 @@
+{
+    "collectionName": "components_all_page_quotes",
+    "info": {
+        "displayName": "Quote",
+        "description": ""
+    },
+    "options": {},
+    "attributes": {
+        "title": {
+            "type": "string"
+        },
+        "Heading": {
+            "type": "string"
+        },
+        "description": {
+            "type": "text"
+        },
+        "Advantage1": {
+            "type": "string"
+        },
+        "Advantage2": {
+            "type": "string"
+        },
+        "Advantage3": {
+            "type": "string"
+        },
+        "Advantage4": {
+            "type": "string"
+        },
+        "Advantage5": {
+            "type": "string"
+        },
+        "LearnMore": {
+            "type": "component",
+            "repeatable": false,
+            "component": "pagesetting.links"
+        },
+        "OurCoreValues": {
+            "type": "component",
+            "repeatable": false,
+            "component": "pagesetting.links"
+        },
+        "background": {
+            "allowedTypes": [
+                "images",
+                "files",
+                "videos",
+                "audios"
+            ],
+            "type": "media",
+            "multiple": false
+        }
+    }
+}
