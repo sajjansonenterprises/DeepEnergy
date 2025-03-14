@@ -5,7 +5,7 @@ export default [
   {
     name: 'strapi::cors',
     config: {
-      origin: ['http://localhost:3000',"http://192.168.1.37:3000","deepenergyenterprises.onrender.com"], // specify your website domain(s) here
+      origin: ['http://localhost:3000',"http://192.168.1.37:3000","deepenergyenterprises.onrender.com","https://deep-energy.vercel.app/], // specify your website domain(s) here
       methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'HEAD', 'OPTIONS'],
       headers: ['Content-Type', 'Authorization', 'Origin', 'Accept'],
       keepHeaderOnError: true,
