@@ -19,13 +19,13 @@ interface SearchResult {
 
 interface APIResponseItem {
   id: string;
-  attributes: {
+
     title?: string;
     Title?: string;
     slug: string;
     description?: string;
     category?: string;
-  };
+  
 }
 
 export default function SearchBar() {

@@ -18,14 +18,14 @@ interface SearchResult {
 
 interface APIResponseItem {
   id: string;
-  attributes: {
+ 
     title?: string;
     Title?: string;
     slug: string;
     content?: string;
     description?: string;
     publishedAt?: string;
-  };
+
 }
 
 function SearchPageContent() {
@@ -79,11 +79,11 @@ function SearchPageContent() {
           return response.data.map((item: APIResponseItem) => ({
             id: item.id,
             type,
-            title: item.attributes.title || item.attributes.Title || "Untitled",
-            slug: item.attributes.slug,
-            content: type === "blog" ? item.attributes.content : undefined,
-            description: type !== "blog" ? item.attributes.description : undefined,
-            publishedAt: item.attributes.publishedAt,
+            title: item.title || item.Title || "Untitled",
+            slug: item.slug,
+            content: type === "blog" ? item.content : undefined,
+            description: type !== "blog" ? item.description : undefined,
+            publishedAt: item.publishedAt,
           }));
         });
 
