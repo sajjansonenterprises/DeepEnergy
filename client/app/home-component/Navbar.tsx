@@ -29,7 +29,7 @@ export default function Navbar() {
   const [menuItems, setMenuItems] = useState<NavbarItem[]>([]);
   const [isSticky, setIsSticky] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [logo, setLogo] = useState("/default-logo.png");
+  const [logo, setLogo] = useState("https://deepenergy.onrender.com/uploads/Screenshot_2025_03_14_at_1_13_51_PM_932a699e2f.png");
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
 
   useEffect(() => {
