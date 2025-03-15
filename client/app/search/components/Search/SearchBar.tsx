@@ -61,10 +61,10 @@ export default function SearchBar() {
           return data.map((item: APIResponseItem) => ({
             id: item.id,
             type,
-            title: item.attributes.title || item.attributes.Title || "Untitled",
-            slug: item.attributes.slug,
-            description: item.attributes.description,
-            category: item.attributes.category,
+            title: item.title || item.Title || "Untitled",
+            slug: item.slug,
+            description: item.description,
+            category: item.category,
           }));
         });
 
