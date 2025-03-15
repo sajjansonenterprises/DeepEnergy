@@ -83,7 +83,7 @@ export default function Navbar() {
           >
             <div className="relative h-12 w-20">
               <Image
-                src={logo}
+                src={logo||"https://deepenergy.onrender.com/uploads/Screenshot_2025_03_14_at_1_13_51_PM_932a699e2f.png"}
                 alt={"deep energy"}
                 fill
                 className="object-contain"
