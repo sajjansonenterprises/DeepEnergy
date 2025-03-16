@@ -5,7 +5,6 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { useAllPageData } from "@/context/pageContext/PageComponentContext";
-import { usePageData } from "@/context/pageContext/PageContext";
 export default function LatestProjects() {
   const { homeData } = useAllPageData();
   const projectData=homeData?.Home?.Project

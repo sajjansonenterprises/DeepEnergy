@@ -3,7 +3,6 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import { useAllPageData } from "@/context/pageContext/PageComponentContext";
-import { usePageData } from "@/context/pageContext/PageContext";
 export default function BrandSection() {
  const {homeData}=useAllPageData()
  const brandData=homeData?.Home?.Brand

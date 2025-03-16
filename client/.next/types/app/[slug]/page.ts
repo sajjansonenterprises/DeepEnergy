@@ -1,4 +1,4 @@
-// File: /Users/apple/Documents/projects/Deep Energy/backup3/client/app/[slug]/page.tsx
+// File: /Users/apple/Documents/GitHub/DeepEnergy/client/app/[slug]/page.tsx
 import * as entry from '../../../../app/[slug]/page.js'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 

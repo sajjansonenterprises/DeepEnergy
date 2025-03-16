@@ -4,7 +4,6 @@ import { FaBolt, FaArrowRight, FaLeaf, FaSolarPanel, FaChevronLeft, FaChevronRig
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useAllPageData } from "@/context/pageContext/PageComponentContext";
-import { usePageData } from "@/context/pageContext/PageContext";
 
 interface slide {
   heading:string;

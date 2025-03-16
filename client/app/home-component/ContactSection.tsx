@@ -3,7 +3,6 @@
 import { FaArrowRight} from "react-icons/fa";
 import { useRouter } from "next/navigation";
 import { useAllPageData } from "@/context/pageContext/PageComponentContext";
-import { usePageData } from "@/context/pageContext/PageContext";
 
 export default function ContactSection() {
   const router = useRouter();
