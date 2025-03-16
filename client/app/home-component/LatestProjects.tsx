@@ -8,7 +8,6 @@ import { useAllPageData } from "@/context/pageContext/PageComponentContext";
 import { usePageData } from "@/context/pageContext/PageContext";
 export default function LatestProjects() {
   const { homeData } = useAllPageData();
-  const { serverurl } = usePageData();
   const projectData=homeData?.Home?.Project
   const projects=projectData?.projects
   
@@ -77,7 +76,7 @@ const router=useRouter()
                       {/* Project Image */}
                     
   <Image
-    src={`${serverurl}${project.image.formats.large.url}`}
+    src={`${project.image.formats.large.url}`}
     alt={project?.image?.alternativeText  || "Project Image"}
     height={1000}
     width={1000}

@@ -13,8 +13,6 @@ export default function ArticleSection() {
  const articleData=homeData?.Home?.Article
  const blogs=articleData?.blogs ||[]
   const router = useRouter();
-  const {serverurl}=usePageData()
-
   const [currentSlide, setCurrentSlide] = useState<number>(0);
   const [slidesPerView, setSlidesPerView] = useState<number>(3);
 
@@ -82,7 +80,7 @@ export default function ArticleSection() {
                     
                             <Image
                             key={index}
-                              src={`${serverurl}${blog.image.formats.large.url}`}
+                              src={`${blog.image.formats.large.url}`}
                               alt={blog.image.alternativeText}
                               width={500}
                               height={375}

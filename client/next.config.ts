@@ -10,7 +10,7 @@ const nextConfig: NextConfig = {
         pathname: '/uploads/**', // Adjust based on Strapi image paths
       },
     ],
-    domains: ["images.pexels.com","deepenergy.onrender.com"], // ✅ Allow Pexels images
+    domains: ["images.pexels.com","deepenergy.onrender.com","res.cloudinary.com"], // ✅ Allow Pexels images
     unoptimized: true, // 👈 Disable optimization (try enabling later)
 
   },  

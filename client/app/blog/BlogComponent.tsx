@@ -63,10 +63,11 @@ const router=useRouter()
       });
   }, [serverurl]);
 
+ 
   if (error) return <div className="text-center py-10 text-red-500">{error}</div>;
 
   return (
-    <>{serverurl&&pageData&&blogs.length>0?(<div>
+    <>{pageData&&blogs.length>0?(<div>
       <Navbar />
 
       {/* Breadcrumb Section */}
@@ -74,7 +75,7 @@ const router=useRouter()
         className="relative w-full h-[300px] bg-cover bg-center flex items-center justify-center text-center"
         style={{
           backgroundImage:
-            `url(${serverurl}${pageData?.background?.url})`,
+            `url(${pageData?.background?.url})`,
           backgroundColor: "rgb(27 26 26 / 68%)",
           backgroundBlendMode: "overlay",
         }}
@@ -137,7 +138,7 @@ const router=useRouter()
                   {blog.image?.formats?.small?.url && (
   <div className="relative w-full h-40">
     <Image
-      src={`${serverurl}${blog.image.formats.small.url}`}
+      src={`${blog.image.formats.small.url}`}
       alt={blog.title}
       fill
       className="object-cover rounded-md"

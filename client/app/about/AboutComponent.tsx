@@ -15,14 +15,14 @@ export const metadata: Metadata = {
 };
 export default function AboutComponent() {
 
- const {aboutData,serverurl}=usePageData()
+ const {aboutData}=usePageData()
 const router=useRouter()
 
 
 
   
   return (
-   <>{serverurl&&aboutData&&aboutData?.breadcrumb?.bg_image?.url?( <div>
+   <>{aboutData&&aboutData?.breadcrumb?.bg_image?.url?( <div>
 
       
       <Navbar />
@@ -31,7 +31,7 @@ const router=useRouter()
       <div
         className="relative w-full h-[650px] bg-cover bg-center flex items-center px-6 text-center md:text-left md:justify-start"
         style={{
-          backgroundImage: `url(${serverurl}${aboutData?.breadcrumb?.bg_image?.url })`,
+          backgroundImage: `url(${aboutData?.breadcrumb?.bg_image?.url })`,
           backgroundColor: "rgb(27 26 26 / 20%)",
           backgroundBlendMode: "overlay",
         }}
@@ -67,7 +67,7 @@ const router=useRouter()
         <div className="md:w-1/2">
         
        {aboutData?.breadcrumb?.whoWeAreImage&& aboutData?.breadcrumb?.whoWeAreImage?(   <Image
-            src={`${serverurl}${aboutData?.breadcrumb?.whoWeAreImage?.formats?.large?.url}` || "https://via.placeholder.com/1200"}
+            src={`${aboutData?.breadcrumb?.whoWeAreImage?.formats?.large?.url}` || "https://via.placeholder.com/1200"}
             className="rounded-lg shadow-lg w-full"
             width={1000}
             height={100}

@@ -51,7 +51,7 @@ export default function ExperienceTestimonials() {
         <div className="relative w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden border-8 border-gray-300 shadow-lg flex items-center justify-center">
           {testimonialsData?.image?.formats?.medium?.url ? (
             <Image
-              src={`${serverurl}${testimonialsData.image.formats.medium.url}`}
+              src={`${testimonialsData.image.formats.medium.url}`}
               fill
               alt="Biomass Energy"
               className="w-full h-full object-cover rounded-full"
@@ -101,7 +101,7 @@ export default function ExperienceTestimonials() {
                     }`}
                     onClick={() => setCurrentTestimonial(index)}
                   >
-                    <span className="text-sm font-semibold">{testimonial?.profilePic?.url?(<Image   src={`${serverurl}${testimonial?.profilePic?.url}`}
+                    <span className="text-sm font-semibold">{testimonial?.profilePic?.url?(<Image   src={`${testimonial?.profilePic?.url}`}
               fill
               alt="Biomass Energy"
               className="w-full h-full object-cover rounded-full"/>):(null)}</span>

@@ -20,6 +20,17 @@
       "component": "pagesetting.title-and-description"
     },
     "background": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "slugBackground": {
       "allowedTypes": [
         "images",
         "files",

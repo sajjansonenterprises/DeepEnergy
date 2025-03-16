@@ -32,6 +32,20 @@ export default function ProjectSlugComponent({ params }: ProjectDetailPageProps)
   const [project, setProject] = useState<Project | null>(null); 
   const {serverurl}=usePageData()
 const router=useRouter()
+const [slugBackground,setSlugBackground]=useState('https://images.pexels.com/photos/162646/cooling-tower-power-plant-energy-industry-162646.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1')
+useEffect(() => {
+  const fetchSlugBg = async () => {
+    try {
+      const response = await fetch(`${serverurl}/api/project-page?populate[slugBackground][populate]=*`);
+      const data = await response.json();
+      setSlugBackground(`${data?.data?.logo.url}`);
+    } catch (error) {
+      console.error("Error fetching logo:", error);
+    }
+  };
+
+  if (serverurl) fetchSlugBg();
+}, [serverurl]);
   useEffect(() => {
     const fetchProject = async () => {
       const resolvedParams = await params;  // Resolving the Promise
@@ -63,7 +77,7 @@ const router=useRouter()
         <div
           className="absolute inset-0 bg-cover bg-center opacity-60"
           style={{
-            backgroundImage: `url('https://images.pexels.com/photos/162646/cooling-tower-power-plant-energy-industry-162646.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1')`,
+            backgroundImage: `url(${slugBackground})`,
           }}
         ></div>
 
@@ -90,7 +104,7 @@ const router=useRouter()
           
             <div className="overflow-hidden rounded-lg shadow-lg transition-transform transform hover:scale-105">
               <Image
-                src={`${serverurl}${project?.image?.formats?.large?.url}`}
+                src={`${project?.image?.formats?.large?.url}`}
                 alt={project?.image.alternativeText}
                 width={1200}
                 height={800}

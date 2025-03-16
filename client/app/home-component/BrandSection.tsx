@@ -6,7 +6,6 @@ import { useAllPageData } from "@/context/pageContext/PageComponentContext";
 import { usePageData } from "@/context/pageContext/PageContext";
 export default function BrandSection() {
  const {homeData}=useAllPageData()
- const {serverurl}=usePageData()
  const brandData=homeData?.Home?.Brand
  const brands=brandData?.brand_collabs||[]
  
@@ -42,7 +41,7 @@ export default function BrandSection() {
                     return (
                       <Image
                         key={i}
-                        src={`${serverurl}${imageUrl}`}
+                        src={`${imageUrl}`}
                         alt={logo?.image?.alternativeText || "Brand logo"}
                         width={1000}
                         height={1000}

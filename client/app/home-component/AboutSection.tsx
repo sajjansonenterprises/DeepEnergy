@@ -12,7 +12,6 @@ import { usePageData } from "@/context/pageContext/PageContext";
 export default function AboutSection() {
   const router = useRouter();
   const { homeData } = useAllPageData();
-  const {serverurl}=usePageData()
   // Initialize state as about or null, not about | object
   const aboutData = homeData?.Home?.About 
 
@@ -25,7 +24,7 @@ export default function AboutSection() {
           {/* Left Section - Image with Card */}
           <div className="relative w-full md:w-1/2 flex justify-center">
             <Image
-              src={`${serverurl}${aboutData.image.formats.large.url}`}
+              src={`${aboutData.image.formats.large.url}`}
               alt={aboutData.image.alternativeText}
               width={1000}
               height={1000}

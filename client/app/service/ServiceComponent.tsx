@@ -94,7 +94,7 @@ const router=useRouter()
       <div
         className="relative w-full h-[650px] bg-cover bg-center flex items-center px-6 md:px-20"
         style={{
-          backgroundImage: `url(${serverurl}${serviceData?.BreadCrumb?.bg_image?.url})`,
+          backgroundImage: `url(${serviceData?.BreadCrumb?.bg_image?.url})`,
           backgroundColor: "rgb(27 26 26 / 50%)",
           backgroundBlendMode: "overlay",
         }}
@@ -156,7 +156,7 @@ const router=useRouter()
             >
               {/* Service Image */}
               <Image
-                src={`${serverurl}${service.image?.find(i => i.formats?.small?.url)?.formats.small.url}`}
+                src={`${service.image?.find(i => i.formats?.small?.url)?.formats.small.url}`}
                 alt={service.Title}
                 width={1000}
                 height={1000}

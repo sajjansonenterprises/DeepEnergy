@@ -42,10 +42,24 @@ interface ServiceContext {
 export default function ServiceSlug() {
   const params = useParams(); // ✅ Fix Next.js 14 issue
   const { services1, categories } = useServices() as ServiceContext;
-  const { serverurl } = usePageData();
   const [service, setService] = useState<Service | null>(null);
   const [loading, setLoading] = useState(true);
-const router=useRouter()
+  const router=useRouter()
+  const {serverurl}=usePageData()
+  const [slugBackground,setSlugBackground]=useState('https://images.pexels.com/photos/1556704/pexels-photo-1556704.jpeg')
+  useEffect(() => {
+    const fetchSlugBg = async () => {
+      try {
+        const response = await fetch(`${serverurl}/api/service-page?populate[slugBackground][populate]=*`);
+        const data = await response.json();
+        setSlugBackground(`${data?.data?.logo.url}`);
+      } catch (error) {
+        console.error("Error fetching logo:", error);
+      }
+    };
+  
+    if (serverurl) fetchSlugBg();
+  }, [serverurl]);
   // Fetch Service Data from Context API
   useEffect(() => {
     if (!params?.slug || !services1 || services1.length === 0) return;
@@ -77,7 +91,7 @@ const router=useRouter()
 
       {/* Breadcrumb Section */}
       <div className="relative w-full h-[500px] bg-cover bg-center flex items-center px-6 md:px-20"
-        style={{ backgroundImage: "url('https://images.pexels.com/photos/1556704/pexels-photo-1556704.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1')", backgroundColor: "rgb(27 26 26 / 68%)", backgroundBlendMode: "overlay" }}>
+        style={{ backgroundImage: `url(${slugBackground})`, backgroundColor: "rgb(27 26 26 / 68%)", backgroundBlendMode: "overlay" }}>
         <div className="absolute top-5 left-5 text-white text-sm flex items-center">
           <FaHome className="mr-2" />
           <button onClick={()=>router.push("/")} className="hover:underline">Home</button>
@@ -107,7 +121,7 @@ const router=useRouter()
               <div key={index} className="img">
                 {image?.formats?.large?.url ? (
                   <Image
-                    src={`${serverurl}${image.formats.large.url}`}
+                    src={`${image.formats.large.url}`}
                     width={1000}
                     height={1000}
                     className="w-full"

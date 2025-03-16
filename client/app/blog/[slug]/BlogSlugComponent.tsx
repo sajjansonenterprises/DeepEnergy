@@ -30,11 +30,25 @@ alternativeText?:string;}; // ✅ Fixed: Image is now an array
 export default function BlogSlugComponent() {
   const { blogs, loading } = useBlogs(); // Fetch blogs from context
   const { slug } = useParams(); // ✅ Fix for Next.js 14
-const {serverurl}=usePageData()
+const [slugBackground,setSlugBackground]=useState('https://images.pexels.com/photos/1556704/pexels-photo-1556704.jpeg')
 const router =useRouter()
-  // ✅ Explicit Type for useState Hooks
-  const [blog, setBlog] = useState<Blog | null>(null);
-  const [recentBlogs, setRecentBlogs] = useState<Blog[]>([]);
+// ✅ Explicit Type for useState Hooks
+const [blog, setBlog] = useState<Blog | null>(null);
+const [recentBlogs, setRecentBlogs] = useState<Blog[]>([]);
+const {serverurl}=usePageData()
+ useEffect(() => {
+    const fetchSlugBg = async () => {
+      try {
+        const response = await fetch(`${serverurl}/api/blog-page?populate[slugBackground][populate]=*`);
+        const data = await response.json();
+        setSlugBackground(`${data?.data?.logo.url}`);
+      } catch (error) {
+        console.error("Error fetching logo:", error);
+      }
+    };
+
+    if (serverurl) fetchSlugBg();
+  }, [serverurl]);
 
   useEffect(() => {
     if (!slug || !blogs || blogs.length === 0) return;
@@ -64,12 +78,12 @@ const router =useRouter()
   }
 
   return (
-    <>{serverurl&&blog?(<div>
+    <>{blog?(<div>
       <Navbar />
 
       {/* Breadcrumb Navigation */}
       <div className="relative w-full h-[300px] bg-cover bg-center flex items-center px-6 md:px-20"
-        style={{ backgroundImage: "url('https://images.pexels.com/photos/1556704/pexels-photo-1556704.jpeg')", backgroundColor: "rgb(27 26 26 / 68%)", backgroundBlendMode: "overlay" }}>
+        style={{ backgroundImage: `url(${slugBackground})`, backgroundColor: "rgb(27 26 26 / 68%)", backgroundBlendMode: "overlay" }}>
         <div className="absolute top-5 left-5 text-white text-sm flex items-center">
           <FaHome className="mr-2" />
           <button onClick={()=>router.push("/")} className="hover:underline">Home</button>
@@ -89,7 +103,7 @@ const router =useRouter()
          
               <Image
                
-                src={`${serverurl}${blog?.image?.url}`}
+                src={`${blog?.image?.url}`}
                 alt={blog?.image?.alternativeText?? "biomass energy"}
                 width={800}
                 height={400}
@@ -134,7 +148,7 @@ const router =useRouter()
                  
                       <Image
                 
-                        src={`${serverurl}${recent?.image?.formats?.medium?.url}`}
+                        src={`${recent?.image?.formats?.medium?.url}`}
                         alt={recent.title}
                         width={80}
                         height={80}

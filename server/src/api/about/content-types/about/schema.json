@@ -15,16 +15,6 @@
       "type": "component",
       "repeatable": false,
       "component": "all-page.about"
-    },
-    "background": {
-      "allowedTypes": [
-        "images",
-        "files",
-        "videos",
-        "audios"
-      ],
-      "type": "media",
-      "multiple": false
     }
   }
 }

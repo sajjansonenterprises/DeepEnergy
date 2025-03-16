@@ -87,7 +87,7 @@ export default function TeamComponent() {
           {teamData?.teams?.map((member: {team:{Name:string; Position:string; Linkedin:{url:string}; twitter:{url:string}; Facebook:{url:string}; profilePic:{formats:{small:{url:string;}}}}}, index: number) => (
             <div key={index} className="bg-white shadow-lg p-6 rounded-lg flex flex-col items-center">
               <Image 
-                src={`${serverurl}${member.team.profilePic?.formats?.small?.url || "/default-avatar.png"}`} 
+                src={`${member.team.profilePic?.formats?.small?.url || "/default-avatar.png"}`} 
                 className="rounded-full w-32 h-32 shadow-md" 
                 width={1000} 
                 height={1000} 

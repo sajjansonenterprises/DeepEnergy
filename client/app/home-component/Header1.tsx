@@ -18,7 +18,6 @@ interface slide {
 export default function Header1() {
   const router =useRouter()
 const {homeData}=useAllPageData()
-const {serverurl}=usePageData()
 const [currentSlide, setCurrentSlide] = useState(0);
 const [slides, setSlides] = useState<slide[]>([]); // Replace 'any' with your specific type if available
 useEffect(() => {
@@ -48,7 +47,7 @@ useEffect(() => {
         <div 
           key={index} 
           className={`absolute inset-0 flex flex-col md:flex-row items-center justify-center text-center md:text-left transition-opacity duration-1000 ${currentSlide === index ? 'opacity-100' : 'opacity-0'}`}
-          style={{ backgroundImage: `url(${serverurl}${slide.slidderImage.url})`, backgroundSize: 'cover', backgroundPosition: 'center', padding: "5rem 2rem" }}
+          style={{ backgroundImage: `url(${slide.slidderImage.url})`, backgroundSize: 'cover', backgroundPosition: 'center', padding: "5rem 2rem" }}
         >
           {/* Left Section */}
           <div className="w-full md:w-3/6 flex flex-col items-center md:items-start justify-center text-center md:text-left">

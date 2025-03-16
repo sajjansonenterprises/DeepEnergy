@@ -382,9 +382,6 @@ export interface ApiAboutAbout extends Struct.SingleTypeSchema {
   };
   attributes: {
     About: Schema.Attribute.Component<'all-page.about', false>;
-    background: Schema.Attribute.Media<
-      'images' | 'files' | 'videos' | 'audios'
-    >;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -484,6 +481,9 @@ export interface ApiBlogPageBlogPage extends Struct.SingleTypeSchema {
     > &
       Schema.Attribute.Private;
     publishedAt: Schema.Attribute.DateTime;
+    slugBackground: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
     title_description: Schema.Attribute.Component<
       'pagesetting.title-and-description',
       false
@@ -650,6 +650,7 @@ export interface ApiPageSettingPageSetting extends Struct.SingleTypeSchema {
       'api::page-setting.page-setting'
     > &
       Schema.Attribute.Private;
+    logo: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     Navbar: Schema.Attribute.Component<'pagesetting.navbar', true>;
     publishedAt: Schema.Attribute.DateTime;
     Seo: Schema.Attribute.Component<'pagesetting.seo', false>;
@@ -725,6 +726,7 @@ export interface ApiPeopleWhoContactUsPeopleWhoContactUs
 export interface ApiProjectPageProjectPage extends Struct.SingleTypeSchema {
   collectionName: 'project_pages';
   info: {
+    description: '';
     displayName: 'ProjectPage';
     pluralName: 'project-pages';
     singularName: 'project-page';
@@ -744,6 +746,9 @@ export interface ApiProjectPageProjectPage extends Struct.SingleTypeSchema {
     > &
       Schema.Attribute.Private;
     publishedAt: Schema.Attribute.DateTime;
+    slugBackground: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -876,6 +881,9 @@ export interface ApiServicePageServicePage extends Struct.SingleTypeSchema {
     > &
       Schema.Attribute.Private;
     publishedAt: Schema.Attribute.DateTime;
+    slugBackground: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
     title_description: Schema.Attribute.Component<
       'pagesetting.title-and-description',
       false

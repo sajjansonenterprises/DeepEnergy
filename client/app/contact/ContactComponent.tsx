@@ -104,7 +104,7 @@ const router=useRouter()
             className="w-full md:w-1/2 p-6 md:p-8 bg-cover bg-center flex flex-col justify-between"
             style={{
               backgroundImage:
-                `url('${serverurl}${contactData?.card?.background?.url}')`,
+                `url('${contactData?.card?.background?.url}')`,
               backgroundBlendMode: "overlay",
               backgroundColor: "#32c36cd9",
             }}

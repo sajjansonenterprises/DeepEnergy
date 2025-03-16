@@ -8,7 +8,6 @@ import { usePageData } from "@/context/pageContext/PageContext";
 export default function ContactSection() {
   const router = useRouter();
 const {homeData}=useAllPageData()
-const {serverurl}=usePageData()
 const contactData=homeData?.Home.Contact
  
 
@@ -16,7 +15,7 @@ const contactData=homeData?.Home.Contact
     <div>
 
 {
-   contactData? (<div className="relative text-white py-20 px-4 md:px-16 bg-cover bg-center" style={{ backgroundImage: `url(${serverurl}${contactData.backgroundimage.formats.large.url})` }}>
+   contactData? (<div className="relative text-white py-20 px-4 md:px-16 bg-cover bg-center" style={{ backgroundImage: `url(${contactData.backgroundimage.formats.large.url})` }}>
       <div className="absolute inset-0 bg-[#253745e6] opacity-90"></div>
 
       <div className="relative flex flex-col md:flex-row justify-between items-center text-center md:text-left">

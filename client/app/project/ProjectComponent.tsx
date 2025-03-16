@@ -59,7 +59,7 @@ export default function ProjectComponent() {
         <div
           className="absolute inset-0 bg-cover bg-center opacity-90"
           style={{
-            backgroundImage: `url(${serverurl}${projectData?.BreadCrumb?.bg_image?.url})`,
+            backgroundImage: `url(${projectData?.BreadCrumb?.bg_image?.url})`,
             backgroundColor: "rgb(27 26 26 / 50%)",
             backgroundBlendMode: "overlay",
           }}
@@ -106,7 +106,7 @@ export default function ProjectComponent() {
               {/* Project Image */}
               {project?.image?.formats?.small?.url ? (
                 <Image
-                  src={`${serverurl}${project.image.formats.small.url}`}
+                  src={`${project.image.formats.small.url}`}
                   alt={project.title}
                   width={1000}
                   height={1000}
