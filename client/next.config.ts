@@ -4,7 +4,7 @@ const nextConfig: NextConfig = {
   images: {
     remotePatterns: [
       {
-        protocol: 'http',
+        protocol: 'https',
         hostname: 'deepenergy.onrender.com',
         port: '1337',
         pathname: '/uploads/**', // Adjust based on Strapi image paths
