@@ -160,7 +160,7 @@ export default function Navbar() {
                               className={`block px-4 py-2 text-gray-700 hover:bg-gray-50 ${
                                 pathname === subItem.path ? "bg-gray-50 text-green-600" : ""
                               }`}
-                              onClick={closeAllMenus} // Close all menus when a submenu item is clicked
+                           
                             >
                               {subItem.name}
                             </Link>
