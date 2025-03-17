@@ -62,7 +62,11 @@ export default function Navbar() {
   // Close dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node) && // Check if click is outside dropdown
+        !(event.target as HTMLElement).closest("button") // Ensure the click is not on the dropdown button
+      ) {
         setOpenDropdown(null); // Close the dropdown
       }
     };
