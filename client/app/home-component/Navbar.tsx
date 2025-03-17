@@ -1,9 +1,10 @@
 "use client"
 import React from "react";
 import Link from "next/link";
-import { useNavbar } from "../context/NavbarContext";
+
 import { useState } from "react";
 import Image from "next/image";
+import { useNavbar } from "@/context/pagesetting/NavbarContext";
 
 const Navbar = ({ logoUrl }: { logoUrl: string }) => {
   const navbar = useNavbar();
