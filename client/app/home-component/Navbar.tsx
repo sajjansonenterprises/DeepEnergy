@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -32,6 +32,9 @@ export default function Navbar() {
   const [logo, setLogo] = useState("https://deepenergy.onrender.com/uploads/Screenshot_2025_03_14_at_1_13_51_PM_932a699e2f.png");
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
 
+  // Ref for dropdown container
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
     const fetchLogo = async () => {
       try {
@@ -54,6 +57,18 @@ export default function Navbar() {
     const handleScroll = () => setIsSticky(window.scrollY > 100);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setOpenDropdown(null); // Close the dropdown
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
   const toggleDropdown = (menuName: string) => {
@@ -98,6 +113,7 @@ export default function Navbar() {
                 <div
                   key={item.id}
                   className="relative"
+                  ref={dropdownRef} // Attach ref to dropdown container
                 >
                   {item.dropdown.length > 0 ? (
                     <>
