@@ -83,7 +83,7 @@ export default function Navbar() {
           >
             <div className="relative h-12 w-20">
               <Image
-                src={logo||"https://deepenergy.onrender.com/uploads/Screenshot_2025_03_14_at_1_13_51_PM_932a699e2f.png"}
+                src={logo || "https://deepenergy.onrender.com/uploads/Screenshot_2025_03_14_at_1_13_51_PM_932a699e2f.png"}
                 alt={"deep energy"}
                 fill
                 className="object-contain"
@@ -132,9 +132,7 @@ export default function Navbar() {
 
                       {/* Dropdown Menu */}
                       <div
-                        className={`absolute top-full left-0 w-48 bg-white shadow-lg rounded-lg py-2 mt-1 ${
-                          openDropdown === item.name ? "opacity-100 visible" : "opacity-0 invisible"
-                        } transition-opacity duration-200`}
+                        className={`absolute top-full left-0 w-48 bg-white shadow-lg rounded-lg py-2 mt-1 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-opacity duration-200`}
                       >
                         {item.dropdown.map((subItem) => (
                           <Link
