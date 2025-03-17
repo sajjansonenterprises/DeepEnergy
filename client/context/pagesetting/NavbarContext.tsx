@@ -23,6 +23,7 @@ interface PageSettingData {
   updatedAt: string;
   publishedAt: string;
   Navbar: NavbarItem[];
+  logo:{url:string}
 }
 
 interface PageSettingResponse {
