@@ -97,9 +97,7 @@ export default function Navbar() {
               {menuItems.map((item) => (
                 <div
                   key={item.id}
-                  className="relative group"
-                  onMouseEnter={() => setOpenDropdown(item.name)}
-                  onMouseLeave={() => setOpenDropdown(null)}
+                  className="relative"
                 >
                   {item.dropdown.length > 0 ? (
                     <>
@@ -131,22 +129,24 @@ export default function Navbar() {
                       </button>
 
                       {/* Dropdown Menu */}
-                      <div
-                        className={`absolute top-full left-0 w-48 bg-white shadow-lg rounded-lg py-2 mt-1 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-opacity duration-200`}
-                      >
-                        {item.dropdown.map((subItem) => (
-                          <Link
-                            key={subItem.id}
-                            href={subItem.path}
-                            className={`block px-4 py-2 text-gray-700 hover:bg-gray-50 ${
-                              pathname === subItem.path ? "bg-gray-50 text-green-600" : ""
-                            }`}
-                            onClick={closeAllMenus}
-                          >
-                            {subItem.name}
-                          </Link>
-                        ))}
-                      </div>
+                      {openDropdown === item.name && (
+                        <div
+                          className="absolute top-full left-0 w-48 bg-white shadow-lg rounded-lg py-2 mt-1"
+                        >
+                          {item.dropdown.map((subItem) => (
+                            <Link
+                              key={subItem.id}
+                              href={subItem.path}
+                              className={`block px-4 py-2 text-gray-700 hover:bg-gray-50 ${
+                                pathname === subItem.path ? "bg-gray-50 text-green-600" : ""
+                              }`}
+                              onClick={closeAllMenus}
+                            >
+                              {subItem.name}
+                            </Link>
+                          ))}
+                        </div>
+                      )}
                     </>
                   ) : (
                     <Link
