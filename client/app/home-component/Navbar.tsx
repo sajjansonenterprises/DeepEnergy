@@ -82,7 +82,7 @@ export default function Navbar() {
     setIsMenuOpen(false);
     setOpenDropdown(null);
   };
-
+handleSubmenuClick
   // Prevent event propagation for submenu items
   const handleSubmenuClick = (event: React.MouseEvent) => {
     event.stopPropagation(); // Stop event propagation
@@ -165,7 +165,6 @@ export default function Navbar() {
                               className={`block px-4 py-2 text-gray-700 hover:bg-gray-50 ${
                                 pathname === subItem.path ? "bg-gray-50 text-green-600" : ""
                               }`}
-                              onClick={handleSubmenuClick} // Use handleSubmenuClick to prevent propagation
                             >
                               {subItem.name}
                             </Link>
