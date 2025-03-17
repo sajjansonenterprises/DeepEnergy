@@ -64,8 +64,7 @@ export default function Navbar() {
     const handleClickOutside = (event: MouseEvent) => {
       if (
         dropdownRef.current &&
-        !dropdownRef.current.contains(event.target as Node) && // Check if click is outside dropdown
-        !(event.target as HTMLElement).closest("button") // Ensure the click is not on the dropdown button
+        !dropdownRef.current.contains(event.target as Node) // Check if click is outside dropdown
       ) {
         setOpenDropdown(null); // Close the dropdown
       }
@@ -82,6 +81,12 @@ export default function Navbar() {
   const closeAllMenus = () => {
     setIsMenuOpen(false);
     setOpenDropdown(null);
+  };
+
+  // Prevent event propagation for submenu items
+  const handleSubmenuClick = (event: React.MouseEvent) => {
+    event.stopPropagation(); // Stop event propagation
+    closeAllMenus(); // Close all menus
   };
 
   return (
@@ -160,7 +165,7 @@ export default function Navbar() {
                               className={`block px-4 py-2 text-gray-700 hover:bg-gray-50 ${
                                 pathname === subItem.path ? "bg-gray-50 text-green-600" : ""
                               }`}
-                           
+                              onClick={handleSubmenuClick} // Use handleSubmenuClick to prevent propagation
                             >
                               {subItem.name}
                             </Link>
@@ -176,7 +181,7 @@ export default function Navbar() {
                           ? "text-green-600 bg-green-50"
                           : "text-gray-700 hover:text-green-600"
                       }`}
-                    
+                      onClick={closeAllMenus}
                     >
                       {item.name}
                     </Link>
@@ -246,6 +251,7 @@ export default function Navbar() {
                             key={subItem.id}
                             href={subItem.path}
                             className="block px-3 py-2 text-gray-600 hover:text-green-600"
+                            onClick={handleSubmenuClick} // Use handleSubmenuClick to prevent propagation
                           >
                             {subItem.name}
                           </Link>
@@ -257,6 +263,7 @@ export default function Navbar() {
                   <Link
                     href={item.path}
                     className="block px-3 py-2 text-gray-700 hover:text-green-600"
+                    onClick={closeAllMenus}
                   >
                     {item.name}
                   </Link>
