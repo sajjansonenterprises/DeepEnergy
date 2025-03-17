@@ -95,59 +95,75 @@ export default function Navbar() {
           <div className="hidden lg:flex items-center space-x-2">
             <div className="flex items-center space-x-2">
               {menuItems.map((item) => (
-          <div key={item.id} className="relative group">
-          {item.dropdown.length > 0 ? (
-            <>
-              {/* Button */}
-              <button
-                onClick={() => toggleDropdown(item.name)}
-                className={`flex items-center px-3 py-2 rounded-md transition-colors ${
-                  pathname === item.path ? "text-green-600 bg-green-50" : "text-gray-700 hover:text-green-600"
-                }`}
-              >
-                {item.name}
-                <svg
-                  className={`ml-1 h-4 w-4 transition-transform ${
-                    openDropdown === item.name ? "rotate-180" : ""
-                  }`}
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
+                <div
+                  key={item.id}
+                  className="relative group"
+                  onMouseEnter={() => setOpenDropdown(item.name)}
+                  onMouseLeave={() => setOpenDropdown(null)}
                 >
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                </svg>
-              </button>
-        
-              {/* Dropdown Menu - It will stay open when hovering */}
-              <div className="absolute top-full left-0 w-48 bg-white shadow-lg rounded-lg py-2 mt-1 opacity-0 invisible group-hover:opacity-100 group-hover:visible group-hover:pointer-events-auto transition-opacity duration-200 pointer-events-none">
-                {item.dropdown.map((subItem) => (
-                  <Link
-                    key={subItem.id}
-                    href={subItem.path}
-                    className={`block px-4 py-2 text-gray-700 hover:bg-gray-50 ${
-                      pathname === subItem.path ? "bg-gray-50 text-green-600" : ""
-                    }`}
-                    onClick={closeAllMenus}
-                  >
-                    {subItem.name}
-                  </Link>
-                ))}
-              </div>
-            </>
-          ) : (
-            <Link
-              href={item.path}
-              className={`px-3 py-2 rounded-md transition-colors ${
-                pathname === item.path ? "text-green-600 bg-green-50" : "text-gray-700 hover:text-green-600"
-              }`}
-              onClick={closeAllMenus}
-            >
-              {item.name}
-            </Link>
-          )}
-        </div>
-        
-           
+                  {item.dropdown.length > 0 ? (
+                    <>
+                      {/* Button */}
+                      <button
+                        onClick={() => toggleDropdown(item.name)}
+                        className={`flex items-center px-3 py-2 rounded-md transition-colors ${
+                          pathname === item.path
+                            ? "text-green-600 bg-green-50"
+                            : "text-gray-700 hover:text-green-600"
+                        }`}
+                      >
+                        {item.name}
+                        <svg
+                          className={`ml-1 h-4 w-4 transition-transform ${
+                            openDropdown === item.name ? "rotate-180" : ""
+                          }`}
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M19 9l-7 7-7-7"
+                          />
+                        </svg>
+                      </button>
+
+                      {/* Dropdown Menu */}
+                      <div
+                        className={`absolute top-full left-0 w-48 bg-white shadow-lg rounded-lg py-2 mt-1 ${
+                          openDropdown === item.name ? "opacity-100 visible" : "opacity-0 invisible"
+                        } transition-opacity duration-200`}
+                      >
+                        {item.dropdown.map((subItem) => (
+                          <Link
+                            key={subItem.id}
+                            href={subItem.path}
+                            className={`block px-4 py-2 text-gray-700 hover:bg-gray-50 ${
+                              pathname === subItem.path ? "bg-gray-50 text-green-600" : ""
+                            }`}
+                            onClick={closeAllMenus}
+                          >
+                            {subItem.name}
+                          </Link>
+                        ))}
+                      </div>
+                    </>
+                  ) : (
+                    <Link
+                      href={item.path}
+                      className={`px-3 py-2 rounded-md transition-colors ${
+                        pathname === item.path
+                          ? "text-green-600 bg-green-50"
+                          : "text-gray-700 hover:text-green-600"
+                      }`}
+                      onClick={closeAllMenus}
+                    >
+                      {item.name}
+                    </Link>
+                  )}
+                </div>
               ))}
             </div>
 
