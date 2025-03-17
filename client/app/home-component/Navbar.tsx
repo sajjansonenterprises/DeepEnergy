@@ -246,7 +246,7 @@ export default function Navbar() {
                             key={subItem.id}
                             href={subItem.path}
                             className="block px-3 py-2 text-gray-600 hover:text-green-600"
-                      
+                            onClick={closeAllMenus} // Close all menus when a submenu item is clicked
                           >
                             {subItem.name}
                           </Link>
