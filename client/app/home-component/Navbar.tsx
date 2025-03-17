@@ -176,7 +176,7 @@ export default function Navbar() {
                           ? "text-green-600 bg-green-50"
                           : "text-gray-700 hover:text-green-600"
                       }`}
-                      onClick={closeAllMenus}
+                    
                     >
                       {item.name}
                     </Link>
