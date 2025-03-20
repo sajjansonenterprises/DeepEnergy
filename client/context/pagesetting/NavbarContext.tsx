@@ -32,7 +32,7 @@ interface PageSettingResponse {
   meta: Record<string, unknown>;
 }
 
-const NavbarContext = createContext<NavbarItem[]>([]);
+const NavbarContext = createContext<PageSettingData[]>([]);
 
 export const NavbarProvider = ({ children }: { children: React.ReactNode }) => {
   const [navbar, setNavbar] = useState<NavbarItem[]>([]);
