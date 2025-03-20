@@ -40,7 +40,7 @@ export const NavbarProvider = ({ children }: { children: React.ReactNode }) => {
   useEffect(() => {
     fetch(`https://deepenergy.onrender.com/api/page-setting?populate[Navbar][populate]=*&populate[logo][populate]=*`)
       .then((res) => res.json())
-      .then((data: PageSettingResponse) => setNavbar(data.data))
+      .then((data: PageSettingResponse) => setNavbar(data?.data))
       .catch((err) => console.error("Error fetching navbar:", err));
   }, []);
 

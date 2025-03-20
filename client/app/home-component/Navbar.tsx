@@ -6,7 +6,6 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { FiMenu, FiX } from "react-icons/fi";
 import { useNavbar } from "@/context/pagesetting/NavbarContext";
-import { usePageData } from "@/context/pageContext/PageContext";
 import SearchBar from "../search/components/Search/SearchBar";
 
 interface DropdownItem {
@@ -25,11 +24,11 @@ interface NavbarItem {
 export default function Navbar() {
   const pathname = usePathname();
   const navbar = useNavbar();
-  const { serverurl } = usePageData();
+ 
   const [menuItems, setMenuItems] = useState<NavbarItem[]>([]);
   const [isSticky, setIsSticky] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [logo, setLogo] = useState("https://deepenergy.onrender.com/uploads/Screenshot_2025_03_14_at_1_13_51_PM_932a699e2f.png");
+  const [logo, setLogo] = useState<string| null>("https://deepenergy.onrender.com/uploads/Screenshot_2025_03_14_at_1_13_51_PM_932a699e2f.png");
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
 
   useEffect(() => {
@@ -42,12 +41,12 @@ export default function Navbar() {
       }
     };
 
-    if (serverurl) fetchLogo();
+    if (navbar?.logo) fetchLogo();
   }, [navbar?.logo]);
 
   useEffect(() => {
     setMenuItems(navbar?.Navbar);
-  }, [navbar]);
+  }, [navbar?.Navbar]);
 
   useEffect(() => {
     const handleScroll = () => setIsSticky(window.scrollY > 100);
