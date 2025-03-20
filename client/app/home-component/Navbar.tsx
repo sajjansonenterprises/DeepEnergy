@@ -45,7 +45,7 @@ export default function Navbar() {
   }, [navbar?.logo]);
 
   useEffect(() => {
-    setMenuItems(navbar?.Navbar);
+    if(navbar?.Navbar) setMenuItems(navbar?.Navbar);
   }, [navbar?.Navbar]);
 
   useEffect(() => {
@@ -128,7 +128,7 @@ export default function Navbar() {
            
                  {/* Dropdown Menu - It will stay open when hovering over submenu */}
                  <div
-                   className="absolute top-full left-0 w-48 bg-white shadow-lg rounded-lg py-2 mt-1 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-opacity duration-200"
+                   className={`absolute top-full left-0 w-48 bg-white shadow-lg rounded-lg py-2 mt-1 opacity-0 invisible   group-hover:opacity-100 group-hover:visible transition-opacity duration-200`}
                  >
                    {item.dropdown.map((subItem) => (
                      <Link

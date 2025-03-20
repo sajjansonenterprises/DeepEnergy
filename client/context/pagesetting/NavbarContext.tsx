@@ -32,10 +32,10 @@ interface PageSettingResponse {
   meta: Record<string, unknown>;
 }
 
-const NavbarContext = createContext<PageSettingResponse[]>([]);
+const NavbarContext = createContext<PageSettingData| null>(null);
 
 export const NavbarProvider = ({ children }: { children: React.ReactNode }) => {
-  const [navbar, setNavbar] = useState<PageSettingResponse[]>([]);
+  const [navbar, setNavbar] = useState<PageSettingData |null>(null);
 
   useEffect(() => {
     fetch(`https://deepenergy.onrender.com/api/page-setting?populate[Navbar][populate]=*&populate[logo][populate]=*`)
