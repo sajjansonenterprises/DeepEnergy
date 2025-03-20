@@ -35,9 +35,9 @@ export default function Navbar() {
   useEffect(() => {
     const fetchLogo = async () => {
       try {
-        const response = await fetch(`${serverurl}/api/about?populate[background][populate]=*`);
+        const response = await fetch(`${serverurl}/api/page-setting?populate[logo][populate]=*`);
         const data = await response.json();
-        setLogo(`${serverurl}${data?.data?.background.url}`);
+        setLogo(`${serverurl}${data?.data?.logo.url}`);
       } catch (error) {
         console.error("Error fetching logo:", error);
       }
