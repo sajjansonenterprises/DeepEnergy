@@ -17,12 +17,14 @@ interface NavbarItem {
 }
 
 interface PageSettingData {
-  id: number;
+data:{  id: number;
   documentId: string;
   createdAt: string;
   updatedAt: string;
   publishedAt: string;
+
   Navbar: NavbarItem[];
+  logo:{url:string}}
 }
 
 interface PageSettingResponse {
