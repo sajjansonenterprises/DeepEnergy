@@ -35,19 +35,18 @@ export default function Navbar() {
   useEffect(() => {
     const fetchLogo = async () => {
       try {
-        const response = await fetch(`${serverurl}/api/page-setting?populate[logo][populate]=*`);
-        const data = await response.json();
-        setLogo(`${data?.data?.logo.url}`);
+
+        setLogo(`${navbar?.logo?.url}`);
       } catch (error) {
         console.error("Error fetching logo:", error);
       }
     };
 
     if (serverurl) fetchLogo();
-  }, [serverurl]);
+  }, [navbar?.logo]);
 
   useEffect(() => {
-    setMenuItems(navbar);
+    setMenuItems(navbar?.Navbar);
   }, [navbar]);
 
   useEffect(() => {

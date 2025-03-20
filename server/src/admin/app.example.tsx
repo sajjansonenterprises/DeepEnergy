@@ -30,7 +30,17 @@ export default {
       // 'zh-Hans',
       // 'zh',
     ],
+
+  
+        translations: {
+          en: {
+            "Auth.form.email.label": "Custom Email Label",
+            "Auth.form.welcome.title": "Welcome to My Application",
+            // Other translation keys
+          },
+        },
   },
+ 
   bootstrap(app: StrapiApp) {
     console.log(app);
   },
