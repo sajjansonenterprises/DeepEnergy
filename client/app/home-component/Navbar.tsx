@@ -37,7 +37,7 @@ export default function Navbar() {
       try {
         const response = await fetch(`${serverurl}/api/page-setting?populate[logo][populate]=*`);
         const data = await response.json();
-        setLogo(`${serverurl}${data?.data?.logo.url}`);
+        setLogo(`${data?.data?.logo.url}`);
       } catch (error) {
         console.error("Error fetching logo:", error);
       }
