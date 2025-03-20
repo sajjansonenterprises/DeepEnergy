@@ -17,7 +17,7 @@ interface NavbarItem {
 }
 
 interface PageSettingData {
-data:{  id: number;
+
   documentId: string;
   createdAt: string;
   updatedAt: string;
@@ -25,7 +25,7 @@ data:{  id: number;
 
   Navbar: NavbarItem[];
   logo:{url:string}}
-}
+
 
 interface PageSettingResponse {
   data: PageSettingData;
@@ -35,7 +35,7 @@ interface PageSettingResponse {
 const NavbarContext = createContext<PageSettingData[]>([]);
 
 export const NavbarProvider = ({ children }: { children: React.ReactNode }) => {
-  const [navbar, setNavbar] = useState<NavbarItem[]>([]);
+  const [navbar, setNavbar] = useState<PageSettingData[]>([]);
 
   useEffect(() => {
     fetch(`https://deepenergy.onrender.com/api/page-setting?populate[Navbar][populate]=*&populate[logo][populate]=*`)
