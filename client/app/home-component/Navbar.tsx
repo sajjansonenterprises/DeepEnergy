@@ -24,17 +24,20 @@ interface NavbarItem {
 export default function Navbar() {
   const pathname = usePathname();
   const navbar = useNavbar();
- 
+
   const [menuItems, setMenuItems] = useState<NavbarItem[]>([]);
   const [isSticky, setIsSticky] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [logo, setLogo] = useState<string| null>("https://deepenergy.onrender.com/uploads/Screenshot_2025_03_14_at_1_13_51_PM_932a699e2f.png");
+  const [logo, setLogo] = useState<string | null>(
+    "https://deepenergy.onrender.com/uploads/Screenshot_2025_03_14_at_1_13_51_PM_932a699e2f.png"
+  );
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
+  
+
 
   useEffect(() => {
     const fetchLogo = async () => {
       try {
-
         setLogo(`${navbar?.logo?.url}`);
       } catch (error) {
         console.error("Error fetching logo:", error);
@@ -45,7 +48,7 @@ export default function Navbar() {
   }, [navbar?.logo]);
 
   useEffect(() => {
-    if(navbar?.Navbar) setMenuItems(navbar?.Navbar);
+    if (navbar?.Navbar) setMenuItems(navbar?.Navbar);
   }, [navbar?.Navbar]);
 
   useEffect(() => {
@@ -66,9 +69,7 @@ export default function Navbar() {
   return (
     <nav
       className={`w-full bg-white transition-all duration-300 z-50 ${
-        isSticky
-          ? "fixed top-0 shadow-lg"
-          : "relative border-b border-gray-100"
+        isSticky ? "fixed top-0 shadow-lg" : "relative border-b border-gray-100"
       }`}
     >
       <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -81,7 +82,10 @@ export default function Navbar() {
           >
             <div className="relative h-12 w-20">
               <Image
-                src={logo||"https://deepenergy.onrender.com/uploads/Screenshot_2025_03_14_at_1_13_51_PM_932a699e2f.png"}
+                src={
+                  logo ||
+                  "https://deepenergy.onrender.com/uploads/Screenshot_2025_03_14_at_1_13_51_PM_932a699e2f.png"
+                }
                 alt={"deep energy"}
                 fill
                 className="object-contain"
@@ -92,75 +96,78 @@ export default function Navbar() {
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center space-x-2">
             <div className="flex items-center space-x-2">
-              {menuItems.map((item) => (
-             <div
-             key={item.id}
-             className="relative group"
-           >
-             {item.dropdown.length > 0 ? (
-               <>
-                 {/* Button */}
-                 <button
-                   onClick={() => toggleDropdown(item.name)}
-                   className={`flex items-center px-3 py-2 rounded-md transition-colors ${
-                     pathname === item.path
-                       ? "text-green-600 bg-green-50"
-                       : "text-gray-700 hover:text-green-600"
-                   }`}
-                 >
-                   {item.name}
-                   <svg
-                     className={`ml-1 h-4 w-4 transition-transform ${
-                       openDropdown === item.name ? "rotate-180" : ""
-                     }`}
-                     fill="none"
-                     stroke="currentColor"
-                     viewBox="0 0 24 24"
-                   >
-                     <path
-                       strokeLinecap="round"
-                       strokeLinejoin="round"
-                       strokeWidth={2}
-                       d="M19 9l-7 7-7-7"
-                     />
-                   </svg>
-                 </button>
-           
-                 {/* Dropdown Menu - It will stay open when hovering over submenu */}
-                 <div
-                   className={`absolute top-full left-0 w-48 bg-white shadow-lg rounded-lg py-2 mt-1 opacity-0 invisible   group-hover:opacity-100 group-hover:visible transition-opacity duration-200`}
-                 >
-                   {item.dropdown.map((subItem) => (
-                     <Link
-                       key={subItem.id}
-                       href={subItem.path}
-                       className={`block px-4 py-2 text-gray-700 hover:bg-gray-50 ${
-                         pathname === subItem.path ? "bg-gray-50 text-green-600" : ""
-                       }`}
-                       onClick={closeAllMenus}
-                     >
-                       {subItem.name}
-                     </Link>
-                   ))}
-                 </div>
-               </>
-             ) : (
-               <Link
-                 href={item.path}
-                 className={`px-3 py-2 rounded-md transition-colors ${
-                   pathname === item.path
-                     ? "text-green-600 bg-green-50"
-                     : "text-gray-700 hover:text-green-600"
-                 }`}
-                 onClick={closeAllMenus}
-               >
-                 {item.name}
-               </Link>
-             )}
-           </div>
-           
-              ))}
-            </div>
+            {menuItems.map((item) => (
+          <div key={item.id} className="relative">
+            {item.dropdown.length > 0 ? (
+              <>
+                {/* Button to Toggle Dropdown */}
+                <button
+                  onClick={() => toggleDropdown(item.name)}
+                  className={`px-3 py-2 rounded-md transition-colors   rounded-lg  text-center inline-flex items-center ${
+                  pathname === item.path
+                    ? "text-green-600 bg-green-50"
+                    : "text-gray-700 hover:text-green-600"
+                }`}
+                >
+                  {item.name}
+                  <svg
+                    className={`w-2.5 h-2.5 ms-3 transform transition-transform ${
+                      openDropdown === item.name ? "rotate-180" : ""
+                    }`}
+                    aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 10 6"
+                  >
+                    <path
+                      stroke="currentColor"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="m1 1 4 4 4-4"
+                    />
+                  </svg>
+                </button>
+
+                {/* Dropdown Menu - Shows When Open */}
+                {openDropdown === item.name && (
+                  <div className="absolute left-0 mt-2 bg-white divide-y divide-gray-100 rounded-lg shadow-sm w-44">
+                    <ul className="py-2 text-sm text-gray-700">
+                      {item.dropdown.map((subItem) => (
+                        <li key={subItem.id}>
+                          <Link
+                            href={subItem.path}
+                            className={`block px-4 py-2 hover:bg-gray-100 ${
+                  pathname === item.path
+                    ? "text-green-600 bg-green-50"
+                    : "text-gray-700 hover:text-green-600"
+                }`}
+                            onClick={closeAllMenus}
+                          >
+                            {subItem.name}
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+              </>
+            ) : (
+              <Link
+                href={item.path}
+                className={`px-3 py-2 rounded-md transition-colors ${
+                  pathname === item.path
+                    ? "text-green-600 bg-green-50"
+                    : "text-gray-700 hover:text-green-600"
+                }`}
+                onClick={closeAllMenus}
+              >
+                {item.name}
+              </Link>
+            )}
+          </div>
+        ))}
+      </div>
 
             {/* Search and CTA */}
             <div className="flex items-center space-x-4 ml-6">

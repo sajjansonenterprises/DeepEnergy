@@ -52,7 +52,7 @@ export default function ServiceSlug() {
       try {
         const response = await fetch(`${serverurl}/api/service-page?populate[slugBackground][populate]=*`);
         const data = await response.json();
-        setSlugBackground(`${data?.data?.logo.url}`);
+        setSlugBackground(`${data?.data?.slugBackground.url}`);
       } catch (error) {
         console.error("Error fetching logo:", error);
       }
@@ -91,7 +91,7 @@ export default function ServiceSlug() {
 
       {/* Breadcrumb Section */}
       <div className="relative w-full h-[500px] bg-cover bg-center flex items-center px-6 md:px-20"
-        style={{ backgroundImage: `url(${slugBackground})`, backgroundColor: "rgb(27 26 26 / 68%)", backgroundBlendMode: "overlay" }}>
+        style={{ backgroundImage: `url(${slugBackground})`, backgroundColor: "rgb(27 26 26 / 28%)", backgroundBlendMode: "overlay" }}>
         <div className="absolute top-5 left-5 text-white text-sm flex items-center">
           <FaHome className="mr-2" />
           <button onClick={()=>router.push("/")} className="hover:underline">Home</button>

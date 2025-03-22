@@ -76,7 +76,7 @@ const router=useRouter()
         style={{
           backgroundImage:
             `url(${pageData?.background?.url})`,
-          backgroundColor: "rgb(27 26 26 / 68%)",
+          backgroundColor: "rgb(27 26 26 / 32%)",
           backgroundBlendMode: "overlay",
         }}
       >

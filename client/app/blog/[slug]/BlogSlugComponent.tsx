@@ -41,7 +41,7 @@ const {serverurl}=usePageData()
       try {
         const response = await fetch(`${serverurl}/api/blog-page?populate[slugBackground][populate]=*`);
         const data = await response.json();
-        setSlugBackground(`${data?.data?.logo.url}`);
+        setSlugBackground(`${data?.data?.slugBackground.url}`);
       } catch (error) {
         console.error("Error fetching logo:", error);
       }
@@ -83,7 +83,7 @@ const {serverurl}=usePageData()
 
       {/* Breadcrumb Navigation */}
       <div className="relative w-full h-[300px] bg-cover bg-center flex items-center px-6 md:px-20"
-        style={{ backgroundImage: `url(${slugBackground})`, backgroundColor: "rgb(27 26 26 / 68%)", backgroundBlendMode: "overlay" }}>
+        style={{ backgroundImage: `url(${slugBackground})`, backgroundColor: "rgb(27 26 26 / 32%)", backgroundBlendMode: "overlay" }}>
         <div className="absolute top-5 left-5 text-white text-sm flex items-center">
           <FaHome className="mr-2" />
           <button onClick={()=>router.push("/")} className="hover:underline">Home</button>
@@ -106,8 +106,8 @@ const {serverurl}=usePageData()
                 src={`${blog?.image?.url}`}
                 alt={blog?.image?.alternativeText?? "biomass energy"}
                 width={800}
-                height={400}
-                className="w-full h-80 object-cover rounded-lg"
+                height={500}
+                className="w-full h-96 object-cover rounded-lg"
               />
            
    
@@ -126,9 +126,10 @@ const {serverurl}=usePageData()
           </div>
 
           {/* Blog Content */}
+          <div className="prose prose-lg max-w-none text-gray-700">
 <ReactMarkdown rehypePlugins={[rehypeRaw]}>
                 {blog.content || "No content available."}
-              </ReactMarkdown>        </div>
+              </ReactMarkdown>     </div>   </div>
 
         {/* Right Sidebar */}
         <div className="md:w-1/4 space-y-6">

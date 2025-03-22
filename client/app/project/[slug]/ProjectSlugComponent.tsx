@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 
 import { useProjects } from "@/context/projectContext/ProjectContext";
 import Navbar from "@/app/home-component/Navbar";
-import Image from "next/image";
 import { HiHome, HiChevronRight } from "react-icons/hi";
 import Footer from "@/app/ucomponent/Footer";
 import { usePageData } from "@/context/pageContext/PageContext";
@@ -38,7 +37,8 @@ useEffect(() => {
     try {
       const response = await fetch(`${serverurl}/api/project-page?populate[slugBackground][populate]=*`);
       const data = await response.json();
-      setSlugBackground(`${data?.data?.logo.url}`);
+      
+      setSlugBackground(`${data?.data?.slugBackground.url}`);
     } catch (error) {
       console.error("Error fetching logo:", error);
     }
@@ -78,6 +78,8 @@ useEffect(() => {
           className="absolute inset-0 bg-cover bg-center opacity-60"
           style={{
             backgroundImage: `url(${slugBackground})`,
+            backgroundBlendMode:"overlay",
+            backgroundColor:"#00000036"
           }}
         ></div>
 
@@ -99,25 +101,17 @@ useEffect(() => {
 
       {/* Project Details Section */}
       <div className="py-16 px-6 md:px-20">
-        <div className="max-w-7xl mx-auto grid gap-8 md:grid-cols-2">
+        <div className="max-w-7xl mx-auto gap-8 m">
           {/* Project Image */}
           
-            <div className="overflow-hidden rounded-lg shadow-lg transition-transform transform hover:scale-105">
-              <Image
-                src={`${project?.image?.formats?.large?.url}`}
-                alt={project?.image.alternativeText}
-                width={1200}
-                height={800}
-                className="w-full h-72 md:h-96 object-cover"
-              />
-            </div>
-      
+          
           {/* Project Content */}
           <div className="space-y-8 text-gray-700">
             <h2 className="text-2xl md:text-3xl font-semibold">Project Details</h2>
+             <div className="prose prose-lg max-w-none text-gray-700">
            <ReactMarkdown rehypePlugins={[rehypeRaw]}>
                            {project.content || "No content available."}
-                         </ReactMarkdown>
+                         </ReactMarkdown> </div>
           </div>
         </div>
       </div>
