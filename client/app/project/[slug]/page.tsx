@@ -49,11 +49,33 @@ export async function generateMetadata({
   }
 }
 
-interface ProjectDetailPageProps {
-  params: Promise<{ slug: string }>; // params is now a Promise
+
+
+const getProjectSlugData=async(resolvedParams:{slug:string})=>{
+const response = await fetch(
+  `${process.env.serverurl}/api/projects?filters[slug][$eq]=${resolvedParams.slug}&populate=image`,
+     {
+      next: { revalidate: 60 },
+    }
+);  return await response.json()
 }
-export default function page({ params }: ProjectDetailPageProps) {
+export default async function page({
+  params,
+}: {
+  params: Promise<{ slug: string }>; // ✅ Mark params as a Promise
+}) {
+
+   const resolvedParams:{slug:string} = await params;
+  const Data=await getProjectSlugData(resolvedParams)
+
+  const slugbgres = await fetch(`${process.env.serverurl}/api/project-page?populate[slugBackground][populate]=*`,
+       {
+      next: { revalidate: 60 },
+    }
+  );
+  const SlugBgJson=await slugbgres.json()
+  const SlugBg=SlugBgJson?.data?.slugBackground?.url
   return (
-    <div><ProjectSlugComponent params={params}/></div>
+    <div><ProjectSlugComponent  projects={Data?.data}  slugBackground={SlugBg} params={resolvedParams}/></div>
   )
 }

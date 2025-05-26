@@ -1,11 +1,8 @@
 "use client";
 import { useEffect, useState } from "react";
 
-import { useProjects } from "@/context/projectContext/ProjectContext";
 import Navbar from "@/app/home-component/Navbar";
 import { HiHome, HiChevronRight } from "react-icons/hi";
-import Footer from "@/app/ucomponent/Footer";
-import { usePageData } from "@/context/pageContext/PageContext";
 import Preloader from "@/app/ucomponent/Preloader";
 import { useRouter } from "next/navigation";
 import ReactMarkdown from 'react-markdown';
@@ -22,30 +19,12 @@ interface Project {
 }
 
 // Define the type for the ProjectDetailPage component props
-interface ProjectDetailPageProps {
-  params: Promise<{ slug: string }>; // params is now a Promise
-}
 
-export default function ProjectSlugComponent({ params }: ProjectDetailPageProps) {
-  const { projects } = useProjects() ; 
-  const [project, setProject] = useState<Project | null>(null); 
-  const {serverurl}=usePageData()
+
+export default function ProjectSlugComponent({ projects,slugBackground ,params}: {projects:Project[]; slugBackground:string; params:{slug:string}}) {
 const router=useRouter()
-const [slugBackground,setSlugBackground]=useState('https://images.pexels.com/photos/162646/cooling-tower-power-plant-energy-industry-162646.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1')
-useEffect(() => {
-  const fetchSlugBg = async () => {
-    try {
-      const response = await fetch(`${serverurl}/api/project-page?populate[slugBackground][populate]=*`);
-      const data = await response.json();
-      
-      setSlugBackground(`${data?.data?.slugBackground.url}`);
-    } catch (error) {
-      console.error("Error fetching logo:", error);
-    }
-  };
+  const [project, setProject] = useState<Project | null>(null); 
 
-  if (serverurl) fetchSlugBg();
-}, [serverurl]);
   useEffect(() => {
     const fetchProject = async () => {
       const resolvedParams = await params;  // Resolving the Promise
@@ -57,7 +36,7 @@ useEffect(() => {
     };
 
     fetchProject();
-  }, [params, projects]);
+  }, [ projects,params]);
 
   // If no project is found, show a not found message
   if (!project) {
@@ -116,7 +95,6 @@ useEffect(() => {
         </div>
       </div>
 
-    <Footer/>
     </div>
   );
 }

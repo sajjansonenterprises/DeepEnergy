@@ -4,10 +4,7 @@ import { useState, useEffect } from "react";
 import { useParams } from "next/navigation";
 import { FaHome, FaUser, FaCalendarAlt } from "react-icons/fa";
 import Image from "next/image"; // ✅ Optimized Next.js Image
-import { useBlogs } from "@/context/blogContext/BlogContext";
 import Navbar from "@/app/home-component/Navbar";
-import Footer from "@/app/ucomponent/Footer";
-import { usePageData } from "@/context/pageContext/PageContext";
 import Preloader from "@/app/ucomponent/Preloader";
 import { useRouter } from "next/navigation";
 import SearchBar from "@/app/search/components/Search/SearchBar";
@@ -27,28 +24,15 @@ alternativeText?:string;}; // ✅ Fixed: Image is now an array
   author?: string;
 }
 
-export default function BlogSlugComponent() {
-  const { blogs, loading } = useBlogs(); // Fetch blogs from context
+export default function BlogSlugComponent({blogs,slugBackground}:{blogs:Blog[]; slugBackground:string}) {
+ 
   const { slug } = useParams(); // ✅ Fix for Next.js 14
-const [slugBackground,setSlugBackground]=useState('https://images.pexels.com/photos/1556704/pexels-photo-1556704.jpeg')
+
 const router =useRouter()
 // ✅ Explicit Type for useState Hooks
 const [blog, setBlog] = useState<Blog | null>(null);
 const [recentBlogs, setRecentBlogs] = useState<Blog[]>([]);
-const {serverurl}=usePageData()
- useEffect(() => {
-    const fetchSlugBg = async () => {
-      try {
-        const response = await fetch(`${serverurl}/api/blog-page?populate[slugBackground][populate]=*`);
-        const data = await response.json();
-        setSlugBackground(`${data?.data?.slugBackground.url}`);
-      } catch (error) {
-        console.error("Error fetching logo:", error);
-      }
-    };
 
-    if (serverurl) fetchSlugBg();
-  }, [serverurl]);
 
   useEffect(() => {
     if (!slug || !blogs || blogs.length === 0) return;
@@ -60,9 +44,7 @@ const {serverurl}=usePageData()
     setRecentBlogs(blogs.filter((b) => b.slug !== slug).slice(0, 5));
   }, [slug, blogs]);
 
-  if (loading) {
-    return <p className="text-center text-xl"><Preloader/></p>;
-  }
+ 
 
   if (!blog) {
     return (
@@ -168,7 +150,7 @@ const {serverurl}=usePageData()
           </div>
         </div>
       </section>
-      <Footer/>
+
     </div>):(<Preloader/>)}</>
   );
 }

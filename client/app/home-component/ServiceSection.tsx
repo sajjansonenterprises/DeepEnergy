@@ -9,7 +9,6 @@ import {
 } from "react-icons/fa";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { useAllPageData } from "@/context/pageContext/PageComponentContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { IconDefinition } from "@fortawesome/fontawesome-svg-core";
 import { faCheck,faIndustry, faBullseye, faLightbulb, faPlay, faChargingStation, faSeedling, faRecycle, faWrench, faFaceSmile, } from "@fortawesome/free-solid-svg-icons";
@@ -28,11 +27,30 @@ const iconMapping: Record<string, IconDefinition> = {
   faceSmile:faFaceSmile
 
 };
+interface service {
+  
+  heading: string;
+  title: string;
+  buttonTitle:string;
+  services:[{heading:string;
+    Title:string;
+    iconFontAwesome:string
+    Advantages:{a1:string;
+      a2:string;
+      a3:string;
+    };
+slug:string;
+service_category:{
+  categoryName: string;
+  documentId: string;
+  slug: string;
+}
+  }]
 
-export default function ServiceSection() {
+}
+export default function ServiceSection({serviceData}:{serviceData:service}) {
   const router = useRouter();
-  const {homeData}=useAllPageData()
-  const serviceData=homeData?.Home?.Service
+
   const services=serviceData?.services
 
 

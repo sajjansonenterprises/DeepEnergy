@@ -1,14 +1,18 @@
 "use client";
 
 
-import { useAllPageData } from "@/context/pageContext/PageComponentContext";
 import { useState, useEffect } from "react";
 
-export default function AchievementsAndTestimonials() {
+interface testimonial{
+heading:string;
+testimonials:[{name:string;
+  feedback:string;
+}]
+}
+export default function AchievementsAndTestimonials({testimonialData}:{testimonialData:testimonial}) {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [screenWidth, setScreenWidth] = useState(1024); // Default to a large screen width
-const {homeData}=useAllPageData()
-const testimonialData=homeData?.Home?.Testimonial
+
 const testimonials=testimonialData?.testimonials
 
   useEffect(() => {

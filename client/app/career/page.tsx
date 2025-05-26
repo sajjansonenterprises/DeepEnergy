@@ -4,7 +4,6 @@ import { FaHome, FaBriefcase, FaUsers, FaCheckCircle } from "react-icons/fa";
 import Navbar from "../home-component/Navbar";
 import Link from "next/link";
 import { Metadata } from "next";
-import Footer from "../ucomponent/Footer";
 export const metadata: Metadata = {
   title: "Career With US"
 };
@@ -88,7 +87,6 @@ export default function CareerPage() {
           Apply Now
         </button>
       </section>
-      <Footer/>
     </div>
   );
 }

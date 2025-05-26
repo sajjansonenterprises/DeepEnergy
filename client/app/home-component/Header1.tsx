@@ -3,7 +3,6 @@
 import { FaBolt, FaArrowRight, FaLeaf, FaSolarPanel, FaChevronLeft, FaChevronRight, FaIndustry } from "react-icons/fa";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { useAllPageData } from "@/context/pageContext/PageComponentContext";
 
 interface slide {
   heading:string;
@@ -14,14 +13,14 @@ interface slide {
     url:string;
     formats:{large:{url:string}}}
 }
-export default function Header1() {
+export default function Header1({headerData}:{headerData:[]}) {
   const router =useRouter()
-const {homeData}=useAllPageData()
+
 const [currentSlide, setCurrentSlide] = useState(0);
 const [slides, setSlides] = useState<slide[]>([]); // Replace 'any' with your specific type if available
 useEffect(() => {
-  setSlides(homeData?.Home?.Header || []);
-}, [homeData]);
+  setSlides(headerData || []);
+}, [headerData]);
 
 
 

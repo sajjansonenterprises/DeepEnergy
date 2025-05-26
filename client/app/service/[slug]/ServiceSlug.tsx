@@ -6,10 +6,7 @@ import { FaHome, FaCheck, FaPhone, FaEnvelope, FaMapMarkerAlt } from "react-icon
 import Navbar from "../../home-component/Navbar";
 import BrandSection from "../../home-component/BrandSection";
 import QuoteSection from "../../home-component/QuoteSection";
-import { useServices } from "../../../context/ServiceContext";
 import Image from "next/image";
-import { usePageData } from "@/context/pageContext/PageContext";
-import Footer from "@/app/ucomponent/Footer";
 import ReactMarkdown from 'react-markdown';
 import rehypeRaw from "rehype-raw";
 import Preloader from "@/app/ucomponent/Preloader";
@@ -33,33 +30,46 @@ interface Category {
   slug: string;
 }
 
-interface ServiceContext {
-  services1: Service[];
-  categories: Category[];
-  loading: boolean;
-}
+interface quote{
+  title:string;
+  Heading:string;
+  description:string;
+  Advantage1:string;
+  Advantage2:string;
+  Advantage3:string;
+  Advantage4:string;
+  Advantage5:string;
+  LearnMore:{
+    label:string;
+    url:string
+  }
+  OurCoreValues:{
+    label:string;
+    url:string
+  }
+  background: {
+    alternativeText:string;
+     formats: { large: { url: string } } };
 
-export default function ServiceSlug() {
+
+}
+interface brand {
+  heading: string;
+
+  brand_collabs :[{ 
+    brandNname: string;
+
+  
+  image: { 
+    alternativeText:string;
+    formats: { small: { url: string }; large: { url: string } } };}]
+}
+export default function ServiceSlug({slugBackground,services1, categories,brandData,Quote}:{slugBackground:string; services1:Service[]; categories:Category[];brandData:brand; Quote:quote}) {
   const params = useParams(); // ✅ Fix Next.js 14 issue
-  const { services1, categories } = useServices() as ServiceContext;
   const [service, setService] = useState<Service | null>(null);
   const [loading, setLoading] = useState(true);
   const router=useRouter()
-  const {serverurl}=usePageData()
-  const [slugBackground,setSlugBackground]=useState('https://images.pexels.com/photos/1556704/pexels-photo-1556704.jpeg')
-  useEffect(() => {
-    const fetchSlugBg = async () => {
-      try {
-        const response = await fetch(`${serverurl}/api/service-page?populate[slugBackground][populate]=*`);
-        const data = await response.json();
-        setSlugBackground(`${data?.data?.slugBackground.url}`);
-      } catch (error) {
-        console.error("Error fetching logo:", error);
-      }
-    };
-  
-    if (serverurl) fetchSlugBg();
-  }, [serverurl]);
+
   // Fetch Service Data from Context API
   useEffect(() => {
     if (!params?.slug || !services1 || services1.length === 0) return;
@@ -172,9 +182,9 @@ export default function ServiceSlug() {
         </div>
       </section>
 
-      <BrandSection />
-      <QuoteSection />
-      <Footer />
+      <BrandSection brandData={brandData}/>
+      <QuoteSection Quote={Quote} />
+
     </div>
   );
 }

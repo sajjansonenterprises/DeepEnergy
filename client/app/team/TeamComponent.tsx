@@ -1,12 +1,9 @@
 "use client";
 
-import { useState, useEffect } from "react";
 import { FaHome, FaLinkedin, FaTwitter, FaFacebook } from "react-icons/fa";
 import Navbar from "../home-component/Navbar";
 import Image from "next/image";
-import { usePageData } from "@/context/pageContext/PageContext";
 import { useRouter } from "next/navigation";
-import Footer from "../ucomponent/Footer";
 import Preloader from "../ucomponent/Preloader";
 
 interface Team{
@@ -37,23 +34,8 @@ Button1:{
         description:string;
     }
 }
-export default function TeamComponent() {
-  const { serverurl } = usePageData();
-  const [teamData, setTeamData] = useState< Team | null>(null);
-  const [error, setError] = useState("");
+export default function TeamComponent({teamData}:{teamData:Team}) {
   const router=useRouter()
-  // ✅ Fetch Team Page Data from Strapi
-  useEffect(() => {
-    fetch(`${serverurl}/api/our-team?populate[breadcrumb][populate]=*&populate[teams][populate][team][populate]=*&populate[title_description][populate]=*&populate[AboutArea][populate]=*&populate[CTA][populate]=*`)
-      .then((res) => res.json())
-      .then((data) => setTeamData(data?.data))
-      .catch((err) => {
-        console.error("Error fetching team data:", err);
-        setError("Failed to load team members.");
-      });
-  }, [serverurl]);
-
-  if (error) return <div className="text-center py-10 text-red-500">{error}</div>;
 
   return (
   <div>{  teamData?(<div>
@@ -124,6 +106,6 @@ export default function TeamComponent() {
         
        
       </section>
-    </div>):(<div><Preloader/></div>)} <Footer/></div>
+    </div>):(<div><Preloader/></div>)} </div>
   );
 }

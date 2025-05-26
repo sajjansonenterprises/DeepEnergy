@@ -1,12 +1,10 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Image from "next/image"; // ✅ Use Next.js Image for optimization
 import { FaHome, FaArrowRight } from "react-icons/fa";
 import Navbar from "../home-component/Navbar";
 import { useBlogs } from "@/context/blogContext/BlogContext"; // Import the Blog Context
-import { usePageData } from "@/context/pageContext/PageContext"; // ✅ Import Page Context
-import Footer from "../ucomponent/Footer";
 import Preloader from "../ucomponent/Preloader";
 import { useRouter } from "next/navigation";
 
@@ -36,11 +34,9 @@ interface BlogContext {
 }
 
 
-export default function BlogComponent() {
+export default function BlogComponent({pageData}:{pageData:BlogPage}) {
   const { blogs = [], loading } = useBlogs() as BlogContext; // ✅ Default empty array
-  const { serverurl } = usePageData(); // ✅ Get Strapi URL from context
-  const [pageData, setPageData] = useState<BlogPage | null>(null);
-  const [error, setError] = useState("");
+ 
 const router=useRouter()
   // Pagination State
   const [currentPage, setCurrentPage] = useState(1);
@@ -52,19 +48,10 @@ const router=useRouter()
     ? blogs.slice((currentPage - 1) * blogsPerPage, currentPage * blogsPerPage)
     : [];
 
-  // ✅ Fetch Blog Page Data from Strapi
-  useEffect(() => {
-    fetch(`${serverurl}/api/blog-page?populate=*`) // ✅ Corrected URL
-      .then((res) => res.json())
-      .then((data) => setPageData(data?.data))
-      .catch((err) => {
-        console.error("Error fetching blog page data:", err);
-        setError("Failed to load blog page.");
-      });
-  }, [serverurl]);
+  
 
  
-  if (error) return <div className="text-center py-10 text-red-500">{error}</div>;
+
 
   return (
     <>{pageData&&blogs.length>0?(<div>
@@ -190,7 +177,6 @@ const router=useRouter()
           </>
         )}
       </section>
-      <Footer/>
     </div>):(<div><Preloader/></div>)}</>
   );
 }

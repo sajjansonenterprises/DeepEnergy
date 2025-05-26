@@ -3,19 +3,33 @@ import { FaHome, FaCheck, FaBullseye, FaRegLightbulb, FaPlay } from "react-icons
 import Navbar from "../home-component/Navbar";
 
 import Image from "next/image";
-import { usePageData } from "@/context/pageContext/PageContext";
-import { Metadata } from "next";
-import Footer from "../ucomponent/Footer";
+
 import Preloader from "../ucomponent/Preloader";
 import { useRouter } from "next/navigation";
 
-export const metadata: Metadata = {
-  title: "About"
- 
-};
-export default function AboutComponent() {
+interface AboutData {
+  breadcrumb?: {
+    bg_image?: { url?: string };
+    pageTitle?: string;
+    description?: string;
+    button?: { label?: string; url?: string };
+    videoButton?: { label?: string; url?: string };
+    whoWeAreTitle?: string;
+    whoWeAreDescription?: string;
+    whoWeAreImage?: { formats?: { large?: { url?: string } }; alternativeText?: string };
+  };
+  missionVision?: { title: string; description: string }[];
+  whyChooseUs?: { title: string; description: string }[];
+  videoUrl?: string;
+  videoTitle?: string;
+  ctaTitle?: string;
+  ctaDescription?: string;
+  ctaButtonText?: string;
+  whyChooseUsTitle?:string
+}
+export default function AboutComponent({aboutData}:{aboutData:AboutData}) {
 
- const {aboutData}=usePageData()
+ 
 const router=useRouter()
 
 
@@ -130,7 +144,6 @@ const router=useRouter()
           {aboutData?.ctaButtonText || "Contact Us"}
         </button>
       </section>
-      <Footer/>
     </div>):(<Preloader/>)}</>
   );
 }

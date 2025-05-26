@@ -7,8 +7,8 @@ import { ProjectContextProvider } from "@/context/projectContext/ProjectContext"
 import { BlogContextProvider } from "@/context/blogContext/BlogContext";
 import { PageProvider } from "@/context/pageContext/PageContext";
 import { NavbarProvider } from "@/context/pagesetting/NavbarContext";
-import { AllPageProvider } from "@/context/pageContext/PageComponentContext";
 import { FooterProvider } from "@/context/pagesetting/FooterContext";
+import Footer from "./ucomponent/Footer";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -92,7 +92,8 @@ export default function RootLayout({
               <ProjectContextProvider>
                 <BlogContextProvider>
                   <NavbarProvider>
-                    <AllPageProvider>{children}</AllPageProvider>
+                    {children}
+                       <Footer/>
                   </NavbarProvider>
                 </BlogContextProvider>
               </ProjectContextProvider>

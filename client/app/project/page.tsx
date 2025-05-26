@@ -4,8 +4,17 @@ import { Metadata } from 'next';
 export const metadata: Metadata = {
   title:"Projects"
 };
-export default function ProjectPage() {
+const getProjectPageData=async()=>{
+  const res=await   fetch(`${process.env.serverurl}/api/project-page?populate[BreadCrumb][populate]=*`,
+       {
+      next: { revalidate: 60 },
+    }
+  )
+  return await res.json()
+}
+export default async function ProjectPage() {
+  const Data= await getProjectPageData()
   return (
-    <div><ProjectComponent/></div>
+    <div><ProjectComponent projectData={Data?.data}/></div>
   )
 }

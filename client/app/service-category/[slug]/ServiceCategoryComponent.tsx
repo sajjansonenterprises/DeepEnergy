@@ -1,17 +1,12 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { FaHome, FaArrowLeft, FaArrowRight, FaLeaf, FaSolarPanel, FaIndustry } from "react-icons/fa";
-import { useParams } from "next/navigation"; // Import useParams to get the slug
 import Navbar from "../../home-component/Navbar";
-import { useServices } from "@/context/ServiceContext";
 import ContactSection from "../../home-component/ContactSection";
 import QuoteSection from "../../home-component/QuoteSection";
 import Image from "next/image";
 import ExperienceTestimonials from "../../Service-Components/ExpirenceTestimonial";
-import { usePageData } from "@/context/pageContext/PageContext";
-import Footer from "../../ucomponent/Footer";
 import Preloader from "../../ucomponent/Preloader";
-import { useAllPageData } from "@/context/pageContext/PageComponentContext";
 import { useRouter } from "next/navigation";
 
 interface Service {
@@ -22,10 +17,7 @@ interface Service {
   image?: Array<{ formats: { small: { url: string } } }>;
 }
 
-interface ServiceContext {
-  services1: Service[];
-  loading: boolean;
-}
+
 
 interface servicepage {
   title_description: {
@@ -49,18 +41,81 @@ interface servicepage {
   };
 }
 
-export default function ServiceCategoryComponent() {
-  const { services1 } = useServices() as ServiceContext;
-  const { serverurl } = usePageData();
-  const [serviceData, setServiceData] = useState<servicepage | null>(null);
-  const [error, setError] = useState("");
-  const { homeData } = useAllPageData();
+interface contact {
+  
+  heading: string;
+  title: string;
+  paragraph1: string;
+  paragraph2: string;
+  getStarted: {title:string;
+    url:string;
+  };
+  ourPlans: {
+
+    title: string;
+    url:string;
+  },
+  card1: {
+
+    fontAwesomeTag: string,
+    heading: string;
+    description: string,
+    url:string;
+  },
+  card2: {
+
+    fontAwesomeTag: string,
+    heading: string;
+    description: string,
+    url:string;
+  },
+  card3: {
+
+    fontAwesomeTag: string,
+    heading: string;
+    description: string,
+    url:string;
+  },
+  card4: {
+   
+    fontAwesomeTag: string,
+    heading: string;
+    description: string,
+    url:string;
+  },
+  backgroundimage: {
+    alternativeText:string;
+     formats: { large: { url: string } } };
+
+}
+interface quote{
+  title:string;
+  Heading:string;
+  description:string;
+  Advantage1:string;
+  Advantage2:string;
+  Advantage3:string;
+  Advantage4:string;
+  Advantage5:string;
+  LearnMore:{
+    label:string;
+    url:string
+  }
+  OurCoreValues:{
+    label:string;
+    url:string
+  }
+  background: {
+    alternativeText:string;
+     formats: { large: { url: string } } };
+
+
+}
+export default function ServiceCategoryComponent({serviceData,services1,Quote,contactData}:{serviceData:servicepage;services1:Service[];Quote:quote;contactData:contact}) {
+
   const router=useRouter()
-  const { slug } = useParams(); // Get the slug from the URL
-  // Filter services based on the category slug
-  const filteredServices = services1.filter(
-    (service) => service.service_category?.slug === slug
-  );
+  console.log("first",services1)
+  const filteredServices = services1
   // Pagination State
   const [currentPage, setCurrentPage] = useState(1);
   const servicesPerPage = 6;
@@ -71,24 +126,11 @@ export default function ServiceCategoryComponent() {
   const indexOfFirstService = indexOfLastService - servicesPerPage;
   const currentServices = filteredServices.slice(indexOfFirstService, indexOfLastService);
 
-  // Fetch Dynamic Data from Strapi
-  useEffect(() => {
-    fetch(`${serverurl}/api/service-page?populate[BreadCrumb][populate]=*&populate[title_description][populate]=*`)
-      .then((res) => res.json())
-      .then((data) => {
-        setServiceData(data?.data);
-      })
-      .catch((err) => {
-        console.error("Error fetching service page:", err);
-        setError("Failed to load content.");
-      });
-  }, [serverurl]);
 
-  if (error) return <div className="text-center py-10 text-red-500">{error}</div>;
 
   return (
     <>
-      {currentServices.length > 0 && serviceData && homeData?.Home.Contact && homeData.Home.Quote ? (
+      {currentServices.length > 0 && serviceData ? (
         <div>
           <Navbar />
 
@@ -208,10 +250,9 @@ export default function ServiceCategoryComponent() {
             </div>
           </section>
 
-          <ContactSection />
-          <QuoteSection />
+          <ContactSection contactData={contactData}/>
+          <QuoteSection Quote={Quote}/>
           <ExperienceTestimonials />
-          <Footer />
         </div>
       ) : (
         <Preloader />

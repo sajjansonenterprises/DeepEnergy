@@ -4,8 +4,18 @@ import { Metadata } from 'next';
 export const metadata: Metadata = {
   title:"Blog"
 };
-export default function BlogPage() {
+
+const getBlogPageData=async()=>{
+  const res =await fetch(`${process.env.serverurl}/api/blog-page?populate=*`,
+       {
+      next: { revalidate: 60 },
+    }
+  ) // ✅ Corrected URL
+return await res.json()
+}
+export default async function BlogPage() {
+  const Data= await getBlogPageData()
   return (
-    <div><BlogComponent/></div>
+    <div><BlogComponent pageData={Data?.data}/></div>
   )
 }

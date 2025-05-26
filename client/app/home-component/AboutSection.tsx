@@ -3,16 +3,28 @@
 import { useRouter } from "next/navigation";
 import { FaPlug, FaArrowRight } from "react-icons/fa";
 import Image from "next/image";
-import { useAllPageData } from "@/context/pageContext/PageComponentContext";
 
 
+interface about {
+  happyClient: string;
+  heading: string;
+  title: string;
+  ourMission: string;
+  whoWeAre: string;
+  ourVission: string;
+  whyChooseUs: string;
+  readMoreUrl: string;
+  
+  image: {
+    alternativeText:string;
+     formats: { large: { url: string } } };
+}
 
-
-export default function AboutSection() {
+export default function AboutSection({aboutData}:{aboutData:about}) {
   const router = useRouter();
-  const { homeData } = useAllPageData();
+ 
   // Initialize state as about or null, not about | object
-  const aboutData = homeData?.Home?.About 
+
 
 
 

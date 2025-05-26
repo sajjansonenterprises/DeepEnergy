@@ -2,10 +2,18 @@
 
 import { useState, useEffect } from "react";
 import Image from "next/image";
-import { useAllPageData } from "@/context/pageContext/PageComponentContext";
-export default function BrandSection() {
- const {homeData}=useAllPageData()
- const brandData=homeData?.Home?.Brand
+interface brand {
+  heading: string;
+
+  brand_collabs :[{ 
+    brandNname: string;
+
+  
+  image: { 
+    alternativeText:string;
+    formats: { small: { url: string }; large: { url: string } } };}]
+}
+export default function BrandSection({brandData}:{brandData:brand}) {
  const brands=brandData?.brand_collabs||[]
  
 

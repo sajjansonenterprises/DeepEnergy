@@ -1,12 +1,10 @@
 "use client";
 
-import { useState, useEffect } from "react";
 import { FaGlobe, FaPhone, FaEnvelope, FaMapMarkerAlt } from "react-icons/fa";
 import Navbar from "../home-component/Navbar";
 import ContactForm from "../formComponent/ContactForm";
 import { usePageData } from "@/context/pageContext/PageContext";
 import { useRouter } from "next/navigation";
-import Footer from "../ucomponent/Footer";
 import Preloader from "../ucomponent/Preloader";
 interface Contact{
 card:{
@@ -27,24 +25,10 @@ LocationUrl:string;
 
 
 }
-export default function ContactComponent() {
+export default function ContactComponent({contactData}:{contactData:Contact}) {
   const { serverurl } = usePageData(); // ✅ Get the base URL
-  const [contactData, setContactData] = useState<Contact | null>(null);
-  const [error, setError] = useState("");
 const router=useRouter()
-  // ✅ Fetch Contact Page Data from Strapi
-  useEffect(() => {
-    fetch(`${serverurl}/api/contact?populate[card][populate]=*`) // ✅ Fetching contact data
-      .then((res) => res.json())
-      .then((data) => setContactData(data?.data))
-      .catch((err) => {
-        console.error("Error fetching contact data:", err);
-        setError("Failed to load contact details.");
-      });
 
-  }, [serverurl]);
-
-  if (error) return <div className="text-center py-10 text-red-500">{error}</div>;
   const fields = [
     { name: "Name", type: "text", placeholder: "Full Name", required: true },
     { name: "Email", type: "email", placeholder: "Email Address", required: true },
@@ -165,7 +149,6 @@ const router=useRouter()
           </div>
         </div>
       </div>
-      <Footer/>
     </div>):(<Preloader/>)}</>
   );
 }

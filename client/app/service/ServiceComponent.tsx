@@ -1,16 +1,12 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { FaHome, FaArrowLeft, FaArrowRight, FaLeaf, FaSolarPanel, FaIndustry } from "react-icons/fa";
 import Navbar from "../home-component/Navbar";
-import { useServices } from "@/context/ServiceContext";
 import ContactSection from "../home-component/ContactSection";
 import QuoteSection from "../home-component/QuoteSection";
 import Image from "next/image";
 import ExperienceTestimonials from "../Service-Components/ExpirenceTestimonial";
-import { usePageData } from "@/context/pageContext/PageContext";
-import Footer from "../ucomponent/Footer";
 import Preloader from "../ucomponent/Preloader";
-import { useAllPageData } from "@/context/pageContext/PageComponentContext";
 import { useRouter } from "next/navigation";
 
 interface Service {
@@ -20,10 +16,7 @@ interface Service {
   image?: Array<{ formats: { small: { url: string } } }>;
 }
 
-interface ServiceContext {
-  services1: Service[];
-  loading: boolean;
-}
+
 interface servicepage{
     title_description:{
         title:string;
@@ -47,15 +40,77 @@ interface servicepage{
         }
     };
 }
-
-export default function ServiceComponent() {
-  const { services1 } = useServices() as ServiceContext;
-  const {serverurl}=usePageData()
-  const [serviceData, setServiceData] = useState<servicepage | null>(null);
+interface contact {
   
-  const [error, setError] = useState("");
-  const {homeData}=useAllPageData()
+  heading: string;
+  title: string;
+  paragraph1: string;
+  paragraph2: string;
+  getStarted: {title:string;
+    url:string;
+  };
+  ourPlans: {
 
+    title: string;
+    url:string;
+  },
+  card1: {
+
+    fontAwesomeTag: string,
+    heading: string;
+    description: string,
+    url:string;
+  },
+  card2: {
+
+    fontAwesomeTag: string,
+    heading: string;
+    description: string,
+    url:string;
+  },
+  card3: {
+
+    fontAwesomeTag: string,
+    heading: string;
+    description: string,
+    url:string;
+  },
+  card4: {
+   
+    fontAwesomeTag: string,
+    heading: string;
+    description: string,
+    url:string;
+  },
+  backgroundimage: {
+    alternativeText:string;
+     formats: { large: { url: string } } };
+
+}
+interface quote{
+  title:string;
+  Heading:string;
+  description:string;
+  Advantage1:string;
+  Advantage2:string;
+  Advantage3:string;
+  Advantage4:string;
+  Advantage5:string;
+  LearnMore:{
+    label:string;
+    url:string
+  }
+  OurCoreValues:{
+    label:string;
+    url:string
+  }
+  background: {
+    alternativeText:string;
+     formats: { large: { url: string } } };
+
+
+}
+export default function ServiceComponent({contactData,Quote,serviceData,services1}:{contactData:contact; Quote:quote;serviceData:servicepage; services1:Service[]}) {
   // Pagination State
   const [currentPage, setCurrentPage] = useState(1);
   const servicesPerPage = 6;
@@ -67,27 +122,13 @@ const router=useRouter()
   const currentServices = services1.slice(indexOfFirstService, indexOfLastService);
 
   // Fetch Dynamic Data from Strapi
-  useEffect(() => {
-    fetch(`${serverurl}${"/api/service-page?populate[BreadCrumb][populate]=*&populate[title_description][populate]=*"}`)
-      .then((res) => res.json())
-      .then((data) => {
-        setServiceData(data?.data);
 
-       
-      })
-      .catch((err) => {
-        console.error("Error fetching service page:", err);
-        setError("Failed to load content.");
-      
-      });
-  }, [serverurl]);
   
  
-  if (error) return <div className="text-center py-10 text-red-500">{error}</div>;
 
   return (
   <> 
-   {currentServices.length>0&&serviceData&&homeData?.Home.Contact&&homeData.Home.Quote?(<div>
+   {currentServices.length>0&&serviceData?(<div>
       <Navbar />
 
       {/* Header Section */}
@@ -207,10 +248,9 @@ const router=useRouter()
         </div>
       </section>
 
-      <ContactSection />
-      <QuoteSection />
+      <ContactSection contactData={contactData} />
+      <QuoteSection Quote={Quote} />
       <ExperienceTestimonials />
-      <Footer/>
     </div>):(<Preloader/>)}
     </>
   );

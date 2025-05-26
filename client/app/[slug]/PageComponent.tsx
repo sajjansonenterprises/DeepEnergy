@@ -4,7 +4,6 @@ import { usePageData } from "@/context/pageContext/PageContext";
 import React, { useEffect, useState } from "react";
 import Navbar from "../home-component/Navbar";
 import { useParams, useRouter } from "next/navigation";
-import Footer from "../ucomponent/Footer";
 import { FaHome } from "react-icons/fa";
 import Preloader from "../ucomponent/Preloader";
 
@@ -45,7 +44,7 @@ const PageComponent: React.FC = () => {
           <Navbar />
           <h1>{page.title}</h1>
           <div dangerouslySetInnerHTML={{ __html: page.PageCode || "" }} />
-          <Footer />
+         
         </div>
       ) : (
         <div className="flex flex-col items-center justify-center h-screen bg-gray-100 text-center px-6">

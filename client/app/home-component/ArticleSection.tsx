@@ -4,12 +4,25 @@ import { FaArrowRight } from "react-icons/fa";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
-import { useAllPageData } from "@/context/pageContext/PageComponentContext";
 
+interface article{
+  heading: string;
 
-export default function ArticleSection() {
- const {homeData}=useAllPageData()
- const articleData=homeData?.Home?.Article
+blogs:[{slug: string;
+  title: string;
+  heading: string;
+  description: string;
+  createdAt: string;
+  author:string;
+  categoryName:{
+    categoryName:string
+  }
+  image: { 
+    alternativeText:string;
+    formats: { small: { url: string }; large: { url: string } } };}] 
+}
+export default function ArticleSection({articleData}:{articleData:article}) {
+
  const blogs=articleData?.blogs ||[]
   const router = useRouter();
   const [currentSlide, setCurrentSlide] = useState<number>(0);

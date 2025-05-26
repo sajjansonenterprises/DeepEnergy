@@ -48,8 +48,30 @@ export async function generateMetadata({
   }
 }
 
-export default function page() {
+const getBlogSlugData=async(resolvedParams:{slug:string})=>{
+const response = await fetch(
+  `${process.env.serverurl}/api/blogs?filters[slug][$eq]=${resolvedParams.slug}&populate=image`,
+     {
+      next: { revalidate: 60 },
+    }
+);  return await response.json()
+}
+export default async function page({
+  params,
+}: {
+  params: Promise<{ slug: string }>; // ✅ Mark params as a Promise
+}) {
+   const resolvedParams:{slug:string} = await params;
+  const Data=await getBlogSlugData(resolvedParams)
+  const slugbgres = await fetch(`${process.env.serverurl}/api/blog-page?populate[slugBackground][populate]=*`,
+       {
+      next: { revalidate: 60 },
+    }
+  );
+  const SlugBgJson=await slugbgres.json()
+  const SlugBg=SlugBgJson?.data?.slugBackground?.url
+  console.log(Data)
   return (
-    <BlogSlugComponent/>
+    <BlogSlugComponent blogs={Data?.data} slugBackground={SlugBg}/>
   )
 }

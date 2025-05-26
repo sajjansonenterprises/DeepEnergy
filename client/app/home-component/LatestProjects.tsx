@@ -4,10 +4,21 @@ import { FaArrowRight } from "react-icons/fa";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
-import { useAllPageData } from "@/context/pageContext/PageComponentContext";
-export default function LatestProjects() {
-  const { homeData } = useAllPageData();
-  const projectData=homeData?.Home?.Project
+
+interface project {
+  heading: string;
+  title: string;
+projects:[{  slug: string;
+  title: string;
+  heading: string;
+  description: string;
+  
+  image: { 
+    alternativeText:string;
+    formats: { small: { url: string }; large: { url: string } } };}]
+}
+export default function LatestProjects({projectData}:{projectData:project}) {
+
   const projects=projectData?.projects
   
   const limitedProjects = projects?.slice(0, 6) || []; // ✅ Limit to 6 projects

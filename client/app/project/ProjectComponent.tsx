@@ -1,13 +1,11 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useProjects } from "@/context/projectContext/ProjectContext";
 import { FaArrowRight } from "react-icons/fa";
 import Navbar from "../home-component/Navbar";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
-import { usePageData } from "@/context/pageContext/PageContext";
-import Footer from "../ucomponent/Footer";
 import Preloader from "../ucomponent/Preloader";
 interface project{
     BreadCrumb:{
@@ -18,37 +16,20 @@ interface project{
         description:string
     }
 }
-export default function ProjectComponent() {
+export default function ProjectComponent({projectData}:{projectData:project}) {
   const router = useRouter();
   const { projects } = useProjects();
-  const {serverurl}=usePageData()
   const [visibleProjects, setVisibleProjects] = useState(6); // Show 6 initially
-  const [projectData, setProjectData] = useState<project | null>(null);
 
 
-  const [error, setError] = useState("");
 
   const loadMoreProjects = () => {
     setVisibleProjects((prev) => prev + 6); // Load 6 more projects on click
   };
 
-  // Fetch Dynamic Data from Strapi
-  useEffect(() => {
-    fetch(`${serverurl}/api/project-page?populate[BreadCrumb][populate]=*`)
-      .then((res) => res.json())
-      .then((data) => {
-        setProjectData(data?.data);
- 
-      })
-      .catch((err) => {
-        console.error("Error fetching project page:", err);
-        setError("Failed to load content.");
-   
-      });
-  }, [serverurl]);
 
 
-  if (error) return <div className="text-center py-10 text-red-500">{error}</div>;
+
 
   return (
     <>
@@ -139,7 +120,6 @@ export default function ProjectComponent() {
           </button>
         )}
       </div>
-      <Footer/>
     </div>):(<Preloader/>)}
     </>
   );
