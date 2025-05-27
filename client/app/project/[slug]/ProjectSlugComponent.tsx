@@ -1,12 +1,11 @@
 "use client";
 import { useEffect, useState } from "react";
 
-import Navbar from "@/app/home-component/Navbar";
 import { HiHome, HiChevronRight } from "react-icons/hi";
 import Preloader from "@/app/ucomponent/Preloader";
-import { useRouter } from "next/navigation";
 import ReactMarkdown from 'react-markdown';
 import rehypeRaw from "rehype-raw";
+import Link from "next/link";
 // Define types for project data
 interface Project {
   slug: string;
@@ -22,7 +21,6 @@ interface Project {
 
 
 export default function ProjectSlugComponent({ projects,slugBackground ,params}: {projects:Project[]; slugBackground:string; params:{slug:string}}) {
-const router=useRouter()
   const [project, setProject] = useState<Project | null>(null); 
 
   useEffect(() => {
@@ -49,8 +47,7 @@ const router=useRouter()
 
   return (
     <div>
-      <Navbar />
-      
+
       {/* Hero Section */}
       <div className="relative">
         <div
@@ -64,11 +61,11 @@ const router=useRouter()
 
         <div className="relative z-10 py-24 px-6 md:px-20 text-center text-white">
           <nav className="text-sm mb-6 flex justify-center items-center space-x-2">
-            <button onClick={()=>router.push("/")} className="flex items-center hover:text-green-500">
+            <Link href="/" className="flex items-center hover:text-green-500">
               <HiHome size={20} className="mr-1" /> Home
-            </button>
+            </Link>
             <HiChevronRight size={20} className="text-gray-400" />
-            <button onClick={()=>router.push("/projects")} className="hover:text-green-500">Projects</button>
+            <Link href="/projects" className="hover:text-green-500">Projects</Link>
             <HiChevronRight size={20} className="text-gray-400" />
             <span className="text-green-500">{project.title}</span>
           </nav>

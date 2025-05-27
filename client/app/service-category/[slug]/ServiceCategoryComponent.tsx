@@ -1,13 +1,12 @@
 "use client";
 import { useState } from "react";
 import { FaHome, FaArrowLeft, FaArrowRight, FaLeaf, FaSolarPanel, FaIndustry } from "react-icons/fa";
-import Navbar from "../../home-component/Navbar";
 import ContactSection from "../../home-component/ContactSection";
 import QuoteSection from "../../home-component/QuoteSection";
 import Image from "next/image";
 import ExperienceTestimonials from "../../Service-Components/ExpirenceTestimonial";
 import Preloader from "../../ucomponent/Preloader";
-import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 interface Service {
   slug: string;
@@ -111,10 +110,18 @@ interface quote{
 
 
 }
-export default function ServiceCategoryComponent({serviceData,services1,Quote,contactData}:{serviceData:servicepage;services1:Service[];Quote:quote;contactData:contact}) {
+interface Testimonial{
+  testimonials:{
+   feedback:string
+   profilePic:{url:string}
+  }[];
+  Heading:string;
+  title:string;
+  ExpYear:string;
+  image:{formats:{medium:{url:string}}}
+}
+export default function ServiceCategoryComponent({serviceData,services1,Quote,contactData,testimonialsData}:{serviceData:servicepage;services1:Service[];Quote:quote;contactData:contact;testimonialsData:Testimonial}) {
 
-  const router=useRouter()
-  console.log("first",services1)
   const filteredServices = services1
   // Pagination State
   const [currentPage, setCurrentPage] = useState(1);
@@ -132,7 +139,6 @@ export default function ServiceCategoryComponent({serviceData,services1,Quote,co
     <>
       {currentServices.length > 0 && serviceData ? (
         <div>
-          <Navbar />
 
           {/* Header Section */}
           <div
@@ -146,7 +152,7 @@ export default function ServiceCategoryComponent({serviceData,services1,Quote,co
             {/* Breadcrumb */}
             <div className="absolute top-5 left-5 text-white text-sm flex items-center">
               <FaHome className="mr-2" />
-              <button onClick={()=>router.push("/")} className="hover:underline">Home</button>
+              <Link href="/" className="hover:underline">Home</Link>
               <span className="mx-2">/</span>
               <span className="text-gray-300">{serviceData?.BreadCrumb?.Title || "Our Services"}</span>
             </div>
@@ -169,14 +175,14 @@ export default function ServiceCategoryComponent({serviceData,services1,Quote,co
                 {/* Buttons */}
                 <div className="flex space-x-4">
             
-                    <button onClick={()=>router.push(serviceData?.BreadCrumb?.Button1?.url || "/quote")} className="bg-green-500 text-white px-6 py-3 rounded-md text-lg font-semibold hover:bg-green-600 transition duration-300">
+                    <Link href={`/${serviceData?.BreadCrumb?.Button1?.url}` || "/quote"} className="bg-green-500 text-white px-6 py-3 rounded-md text-lg font-semibold hover:bg-green-600 transition duration-300">
                       {serviceData?.BreadCrumb?.Button1?.label || "Get Started"}
-                    </button>
+                    </Link>
                  
-                    <button onClick={()=>router.push(serviceData?.BreadCrumb?.Button2?.url || "#")} className="border border-white text-white px-6 py-3 rounded-md text-lg font-semibold hover:bg-gray-700 transition duration-300">
+                    <Link href={`/${serviceData?.BreadCrumb?.Button2?.url}` || "#"} className="border border-white text-white px-6 py-3 rounded-md text-lg font-semibold hover:bg-gray-700 transition duration-300">
                       {serviceData?.BreadCrumb?.Button2?.label || "Explore Our Plans"}
                
-                  </button>
+                  </Link>
                 </div>
               </div>
 
@@ -217,10 +223,10 @@ export default function ServiceCategoryComponent({serviceData,services1,Quote,co
 
                     {/* Read More Button */}
                    
-                      <button onClick={()=>router.push(`/service/${service.slug}`)}  className="mt-4 bg-green-500 text-white px-6 py-2 rounded-md text-lg font-semibold hover:bg-green-600 transition duration-300">
+                      <Link href={`/service/${service.slug}`}  className="mt-4 bg-green-500 text-white px-6 py-2 rounded-md text-lg font-semibold hover:bg-green-600 transition duration-300">
                         Read More
                  
-                    </button>
+                    </Link>
                   </div>
                 </div>
               ))}
@@ -252,7 +258,7 @@ export default function ServiceCategoryComponent({serviceData,services1,Quote,co
 
           <ContactSection contactData={contactData}/>
           <QuoteSection Quote={Quote}/>
-          <ExperienceTestimonials />
+          <ExperienceTestimonials testimonialsData={testimonialsData}/>
         </div>
       ) : (
         <Preloader />

@@ -2,13 +2,9 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
-import { ServiceContextProvider } from "../context/ServiceContext";
-import { ProjectContextProvider } from "@/context/projectContext/ProjectContext";
-import { BlogContextProvider } from "@/context/blogContext/BlogContext";
 import { PageProvider } from "@/context/pageContext/PageContext";
-import { NavbarProvider } from "@/context/pagesetting/NavbarContext";
-import { FooterProvider } from "@/context/pagesetting/FooterContext";
 import Footer from "./ucomponent/Footer";
+import Navbar from "./home-component/Navbar";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -70,11 +66,18 @@ export async function generateMetadata(): Promise<Metadata> {
   }
 }
 
-export default function RootLayout({
+
+const getPageSettingData= async()=>{
+  const res = await fetch(`${process.env.serverurl}/api/page-setting?populate[Footer][populate][sections][populate]=*&populate[Footer][populate][contact][populate]=*&populate[Footer][populate][socials][populate]=*&populate[Navbar][populate]=*&populate[logo][populate]=*`)
+return await res.json()
+}
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
+  const Data=await getPageSettingData()
   return (
     <html lang="en">
       <head>
@@ -87,18 +90,11 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <PageProvider>
-          <FooterProvider>
-            <ServiceContextProvider>
-              <ProjectContextProvider>
-                <BlogContextProvider>
-                  <NavbarProvider>
+           
+                  <Navbar navbar={Data?.data}/>
                     {children}
-                       <Footer/>
-                  </NavbarProvider>
-                </BlogContextProvider>
-              </ProjectContextProvider>
-            </ServiceContextProvider>
-          </FooterProvider>
+                       <Footer footerData={Data?.data?.Footer}/>
+       
         </PageProvider>
       </body>
     </html>

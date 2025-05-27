@@ -3,7 +3,6 @@
 import { useState, useEffect } from "react";
 import { FaBolt } from "react-icons/fa";
 import Image from "next/image";
-import { usePageData } from "@/context/pageContext/PageContext";
 interface Testimonial{
   testimonials:{
    feedback:string
@@ -14,22 +13,11 @@ interface Testimonial{
   ExpYear:string;
   image:{formats:{medium:{url:string}}}
 }
-export default function ExperienceTestimonials() {
-  const { serverurl } = usePageData();
-  const [testimonialsData, setTestimonialsData] = useState< Testimonial | null>(null);
+export default function ExperienceTestimonials({testimonialsData}:{testimonialsData:Testimonial}) {
+  
   const [currentTestimonial, setCurrentTestimonial] = useState(0);
-  const [error, setError] = useState("");
 
-  // ✅ Fetch Experience & Testimonials Data
-  useEffect(() => {
-    fetch(`${serverurl}/api/service-page?populate[ExperienceAndTestimonial][populate][testimonials][populate]=*&populate[ExperienceAndTestimonial][populate][image][populate]=*`)
-      .then((res) => res.json())
-      .then((data) => setTestimonialsData(data?.data?.ExperienceAndTestimonial))
-      .catch((err) => {
-        console.error("Error fetching experience & testimonials:", err);
-        setError("Failed to load testimonials.");
-      });
-  }, [serverurl]);
+
 
   // ✅ Auto-Slide Effect for Testimonials
   useEffect(() => {
@@ -41,7 +29,6 @@ export default function ExperienceTestimonials() {
     return () => clearInterval(interval);
   }, [testimonialsData]);
 
-  if (error) return <div className="text-center py-10 text-red-500">{error}</div>;
 
   return (
     <div className="py-20 px-6 md:px-20 flex flex-col md:flex-row items-center gap-16">

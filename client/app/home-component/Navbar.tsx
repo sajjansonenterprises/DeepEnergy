@@ -5,8 +5,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { FiMenu, FiX } from "react-icons/fi";
-import { useNavbar } from "@/context/pagesetting/NavbarContext";
 import SearchBar from "../search/components/Search/SearchBar";
+import TopBar from"./TopBar"
 
 interface DropdownItem {
   id: number;
@@ -18,12 +18,25 @@ interface NavbarItem {
   id: number;
   name: string;
   dropdown: DropdownItem[];
-  path: string;
+  path: string ;
 }
 
-export default function Navbar() {
+interface PageSettingData {
+
+  documentId: string;
+  createdAt: string;
+  updatedAt: string;
+  publishedAt: string;
+
+  Navbar: NavbarItem[];
+  logo:{url:string}}
+
+
+
+export default function Navbar({navbar}:{navbar:PageSettingData}) {
   const pathname = usePathname();
-  const navbar = useNavbar();
+
+  const isHome = pathname === '/';
 
   const [menuItems, setMenuItems] = useState<NavbarItem[]>([]);
   const [isSticky, setIsSticky] = useState(false);
@@ -67,6 +80,8 @@ export default function Navbar() {
   };
 
   return (
+    <div>
+{isHome && (<TopBar/>)}
     <nav
       className={`w-full bg-white transition-all duration-300 z-50 ${
         isSticky ? "fixed top-0 shadow-lg" : "relative border-b border-gray-100"
@@ -263,5 +278,6 @@ export default function Navbar() {
         </div>
       )}
     </nav>
+    </div>
   );
 }

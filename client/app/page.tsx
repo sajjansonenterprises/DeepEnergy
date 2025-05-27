@@ -1,6 +1,4 @@
 
-import TopBar from "./home-component/TopBar";
-import Navbar from "./home-component/Navbar";
 import Header1 from "./home-component/Header1";
 import AboutSection from "./home-component/AboutSection";
 import ContactSection from "./home-component/ContactSection";
@@ -278,7 +276,7 @@ const getHomePageData = async () => {
     };
 export default async function Home() {
   const Data:homeData= await getHomePageData()
-  console.log(Data?.data)
+
   return (
    <> {Data?(<div>
       {/* ✅ Proper use of Head from next/head */}
@@ -286,8 +284,7 @@ export default async function Home() {
 
 
       <main>
-        <TopBar />
-        <Navbar />
+
         <Header1 headerData={Data?.data?.Home?.Header}/>
         <AboutSection aboutData={Data?.data?.Home?.About }/>
         <ContactSection contactData={Data?.data?.Home.Contact}/>

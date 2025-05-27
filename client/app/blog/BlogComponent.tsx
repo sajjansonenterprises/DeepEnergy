@@ -3,10 +3,8 @@
 import { useState } from "react";
 import Image from "next/image"; // ✅ Use Next.js Image for optimization
 import { FaHome, FaArrowRight } from "react-icons/fa";
-import Navbar from "../home-component/Navbar";
-import { useBlogs } from "@/context/blogContext/BlogContext"; // Import the Blog Context
 import Preloader from "../ucomponent/Preloader";
-import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 
 // ✅ Updated Blog Interface (categoryName is optional)
@@ -28,16 +26,9 @@ title_description:{
 background:{url:string}
 }
 
-interface BlogContext {
-  blogs?: Blog[]; // ✅ Ensure blogs is optional to prevent errors
-  loading: boolean;
-}
 
-
-export default function BlogComponent({pageData}:{pageData:BlogPage}) {
-  const { blogs = [], loading } = useBlogs() as BlogContext; // ✅ Default empty array
+export default function BlogComponent({pageData,blogs}:{pageData:BlogPage;blogs:Blog[]}) {
  
-const router=useRouter()
   // Pagination State
   const [currentPage, setCurrentPage] = useState(1);
   const blogsPerPage = 6;
@@ -55,7 +46,6 @@ const router=useRouter()
 
   return (
     <>{pageData&&blogs.length>0?(<div>
-      <Navbar />
 
       {/* Breadcrumb Section */}
       <div
@@ -69,9 +59,9 @@ const router=useRouter()
       >
         <div className="absolute top-5 left-5 text-white text-sm flex items-center">
           <FaHome className="mr-2" />
-          <button onClick={()=>router.push("/")} className="hover:underline">
+          <Link href="/" className="hover:underline">
             Home
-          </button>
+          </Link>
           <span className="mx-2">/</span>
           <span className="text-gray-300">
             {pageData?.BreadCrumbTitle || "Our Blogs"}
@@ -92,9 +82,7 @@ const router=useRouter()
             "Stay updated with the latest trends and insights in the industry."}
         </p>
 
-        {loading ? (
-          <p className="text-xl mt-10">Loading blogs...</p>
-        ) : blogs.length === 0 ? (
+        { blogs.length === 0 ? (
           <p className="text-xl mt-10">No blogs available.</p>
         ) : (
           <>
@@ -142,9 +130,9 @@ const router=useRouter()
 
                   {/* Read More Button */}
                   
-                    <button onClick={()=>router.push(`/blog/${blog.slug}`)} className="mt-auto flex items-center bg-gray-700 text-white px-4 py-2 rounded-md hover:bg-gray-600">
+                    <Link href={`/blog/${blog.slug}`} className="mt-auto flex items-center bg-gray-700 text-white px-4 py-2 rounded-md hover:bg-gray-600">
                       Read More <FaArrowRight className="ml-2" />
-                    </button>
+                    </Link>
                 
                 </div>
               ))}

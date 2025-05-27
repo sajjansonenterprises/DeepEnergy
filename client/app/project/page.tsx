@@ -10,11 +10,18 @@ const getProjectPageData=async()=>{
       next: { revalidate: 60 },
     }
   )
-  return await res.json()
+   const responseProjectData = await fetch(`${process.env.serverurl}/api/projects?populate=*`,
+        {
+      next: { revalidate: 60 },
+    }
+   );
+const projectPageData=await res.json()
+const projectData=await responseProjectData.json()
+  return {projectData,projectPageData}
 }
 export default async function ProjectPage() {
   const Data= await getProjectPageData()
   return (
-    <div><ProjectComponent projectData={Data?.data}/></div>
+    <div><ProjectComponent projectData={Data?.projectPageData?.data} projects={Data?.projectData?.data}/></div>
   )
 }

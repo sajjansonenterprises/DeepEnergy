@@ -70,7 +70,6 @@ export default async function page({
   );
   const SlugBgJson=await slugbgres.json()
   const SlugBg=SlugBgJson?.data?.slugBackground?.url
-  console.log(Data)
   return (
     <BlogSlugComponent blogs={Data?.data} slugBackground={SlugBg}/>
   )

@@ -1,10 +1,38 @@
 "use client";
 
-import { useFooter } from "@/context/pagesetting/FooterContext";
 import { FaTwitter, FaFacebook, FaLinkedin } from "react-icons/fa";
+interface FooterLink {
+  label: string;
+  url: string;
+}
 
-export default function Footer() {
-  const footerData = useFooter();
+interface FooterSection {
+  title: string;
+  links: FooterLink[];
+}
+
+interface ContactInfo {
+  address: string;
+  email: string;
+  phone: string;
+  mapEmbedUrl: string;
+}
+
+interface SocialLinks {
+  twitter: string;
+  facebook: string;
+  linkedin: string;
+}
+
+// Define FooterData type
+interface FooterData {
+  sections: FooterSection[];
+  contact: ContactInfo;
+  socials: SocialLinks;
+  copyright: string;
+}
+export default function Footer({footerData}:{footerData:FooterData}) {
+
 
  
 

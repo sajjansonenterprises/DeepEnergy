@@ -2,10 +2,8 @@
 "use client"
 import { FaHome,FaCheck } from "react-icons/fa";
 
-import Navbar  from "../home-component/Navbar";
 import Link from "next/link";
 import QuoteForm from "../formComponent/QuoteForm";
-import { useRouter } from "next/navigation";
 import Preloader from "../ucomponent/Preloader";
 
 
@@ -33,10 +31,9 @@ interface quote{
 
 }
 export default function QuoteComponent({Quote}:{Quote:quote}) {
-const router=useRouter()
   return (
     <>{Quote&&Quote!=undefined?(<div>
-      <Navbar/>
+
     <div className="relative w-full h-[300px] bg-cover bg-center flex items-center px-6 text-center md:text-left md:justify-start" style={{ backgroundImage: "url('https://images.pexels.com/photos/5115946/pexels-photo-5115946.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1')", backgroundColor: "#1b1a1a80", backgroundBlendMode: "overlay" }}>
 
       {/* Breadcrumb */}
@@ -84,8 +81,8 @@ const router=useRouter()
  
            {/* Buttons */}
            <div className="flex space-x-4 mt-6">
-             <button onClick={()=>router.push(`${Quote?.LearnMore?.url}`)}className="bg-white text-green-500 px-6 py-3 rounded-md text-lg font-semibold hover:bg-gray-100">{Quote?.LearnMore?.label}</button>
-             <button onClick={()=>router.push(`${Quote?.OurCoreValues?.url}`)} className="bg-gray-700 text-white px-6 py-3 rounded-md text-lg font-semibold hover:bg-gray-600">{`${Quote?.OurCoreValues?.label}`}</button>
+             <Link href={`/${Quote?.LearnMore?.url}`}className="bg-white text-green-500 px-6 py-3 rounded-md text-lg font-semibold hover:bg-gray-100">{Quote?.LearnMore?.label}</Link>
+             <Link href={`/${Quote?.OurCoreValues?.url}`} className="bg-gray-700 text-white px-6 py-3 rounded-md text-lg font-semibold hover:bg-gray-600">{`${Quote?.OurCoreValues?.label}`}</Link>
            </div>
          </div>
  

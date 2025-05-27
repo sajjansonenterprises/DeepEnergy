@@ -1,11 +1,8 @@
 "use client";
 
-import { usePageData } from "@/context/pageContext/PageContext";
 import React, { useEffect, useState } from "react";
-import Navbar from "../home-component/Navbar";
 import { useParams, useRouter } from "next/navigation";
 import { FaHome } from "react-icons/fa";
-import Preloader from "../ucomponent/Preloader";
 
 type PageData = {
   id: number;
@@ -18,8 +15,8 @@ type PageData = {
   publishedAt: string;
 };
 
-const PageComponent: React.FC = () => {
-  const { pageData, loading, error } = usePageData();
+const PageComponent= ({pageData}:{pageData:PageData[]}) => {
+
   const { slug } = useParams(); // ✅ Next.js 14 fix
   const [page, setPage] = useState<PageData | null>(null);
   const router = useRouter();
@@ -34,14 +31,12 @@ const PageComponent: React.FC = () => {
     setShowPage(!!selectedPage); // ✅ Update state only when necessary
   }, [slug, pageData]);
 
-  if (loading) return <Preloader />;
-  if (error) return <div>{error}</div>;
 
   return (
     <>
       {showPage && page ? (
         <div>
-          <Navbar />
+ 
           <h1>{page.title}</h1>
           <div dangerouslySetInnerHTML={{ __html: page.PageCode || "" }} />
          

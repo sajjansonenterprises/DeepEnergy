@@ -44,9 +44,14 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     };
   }
 }
-
-export default function page() {
+const getPageData=async()=>{
+      const response = await fetch(`${process.env.serverurl}/api/pages`);
+        const data = await response.json();
+        return data
+}
+export default async function page() {
+  const Data=await getPageData()
   return (
-    <div>{<PageComponent/>}</div>
+    <div>{<PageComponent pageData={Data?.data}/>}</div>
   )
 }

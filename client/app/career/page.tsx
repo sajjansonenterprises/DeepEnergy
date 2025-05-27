@@ -1,7 +1,6 @@
 
 
 import { FaHome, FaBriefcase, FaUsers, FaCheckCircle } from "react-icons/fa";
-import Navbar from "../home-component/Navbar";
 import Link from "next/link";
 import { Metadata } from "next";
 export const metadata: Metadata = {
@@ -17,8 +16,7 @@ export default function CareerPage() {
 
   return (
     <div>
-      <Navbar />
-      
+
         {/* Breadcrumb Section */}
         <div className="relative w-full h-[650px] bg-cover bg-center flex items-center px-6 text-center md:text-left md:justify-start" style={{ backgroundImage: "url('https://images.pexels.com/photos/3760613/pexels-photo-3760613.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1')", backgroundColor: "rgb(27 26 26 / 68%)", backgroundBlendMode: "overlay" }}>
         <div className="absolute top-5 left-5 text-white text-sm flex items-center">

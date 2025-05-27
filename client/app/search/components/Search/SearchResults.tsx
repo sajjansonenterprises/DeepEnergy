@@ -1,5 +1,4 @@
-import Navbar from '@/app/home-component/Navbar';
-import Footer from '@/app/ucomponent/Footer';
+
 import Link from 'next/link';
 import { FaSearch, FaArrowRight } from 'react-icons/fa';
 
@@ -45,7 +44,7 @@ export default function SearchResults({ results, query }: SearchResultsProps) {
   }
 
   return (
-  <><Navbar/>
+  <>
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
       <div className="mb-10 text-center">
         <h1 className="text-4xl font-bold text-gray-900 mb-3">
@@ -110,6 +109,6 @@ export default function SearchResults({ results, query }: SearchResultsProps) {
           </article>
         ))}
       </div>
-    </div><Footer/></>
+    </div></>
   );
 }

@@ -4,12 +4,11 @@ import { useState, useEffect } from "react";
 import { useParams } from "next/navigation";
 import { FaHome, FaUser, FaCalendarAlt } from "react-icons/fa";
 import Image from "next/image"; // ✅ Optimized Next.js Image
-import Navbar from "@/app/home-component/Navbar";
 import Preloader from "@/app/ucomponent/Preloader";
-import { useRouter } from "next/navigation";
 import SearchBar from "@/app/search/components/Search/SearchBar";
 import ReactMarkdown from 'react-markdown';
 import rehypeRaw from "rehype-raw";
+import Link from "next/link";
 // ✅ Define Blog Interface (Handling `image` as an array)
 interface Blog {
   slug: string;
@@ -28,7 +27,6 @@ export default function BlogSlugComponent({blogs,slugBackground}:{blogs:Blog[]; 
  
   const { slug } = useParams(); // ✅ Fix for Next.js 14
 
-const router =useRouter()
 // ✅ Explicit Type for useState Hooks
 const [blog, setBlog] = useState<Blog | null>(null);
 const [recentBlogs, setRecentBlogs] = useState<Blog[]>([]);
@@ -52,25 +50,25 @@ const [recentBlogs, setRecentBlogs] = useState<Blog[]>([]);
   {blog?( <div className="text-center py-20">
         <h1 className="text-3xl font-bold">Blog Not Found</h1>
         <p className="text-gray-500">We couldn&apos;t find the blog you were looking for.</p>
-        <button onClick={()=>router.push("/blogs")} className="mt-6 bg-green-500 text-white px-6 py-3 rounded-md text-lg font-semibold hover:bg-green-600">
+        <Link href={"/blogs"} className="mt-6 bg-green-500 text-white px-6 py-3 rounded-md text-lg font-semibold hover:bg-green-600">
           Back to Blogs
-        </button>
+        </Link>
       </div>):(<Preloader/>)}</> 
     );
   }
 
   return (
     <>{blog?(<div>
-      <Navbar />
+
 
       {/* Breadcrumb Navigation */}
       <div className="relative w-full h-[300px] bg-cover bg-center flex items-center px-6 md:px-20"
         style={{ backgroundImage: `url(${slugBackground})`, backgroundColor: "rgb(27 26 26 / 32%)", backgroundBlendMode: "overlay" }}>
         <div className="absolute top-5 left-5 text-white text-sm flex items-center">
           <FaHome className="mr-2" />
-          <button onClick={()=>router.push("/")} className="hover:underline">Home</button>
+          <Link href={"/"} className="hover:underline">Home</Link>
           <span className="mx-2">/</span>
-          <button onClick={()=>router.push("/blogs")} className="hover:underline">Blogs</button>
+          <Link href={"/blogs"} className="hover:underline">Blogs</Link>
           <span className="mx-2">/</span>
           <span className="text-gray-300">{blog.title}</span>
         </div>
@@ -139,9 +137,9 @@ const [recentBlogs, setRecentBlogs] = useState<Blog[]>([]);
                       />
                  
                   <div>
-                    <button onClick={()=>router.push(`/blog/${recent.slug}`)} className="text-green-500 font-semibold hover:underline">
+                    <Link href={`/blog/${recent.slug}`} className="text-green-500 font-semibold hover:underline">
                       {recent.title}
-                    </button>
+                    </Link>
                     <p className="text-gray-500 text-sm">{new Date(recent.createdAt).toDateString()}</p>
                   </div>
                 </li>

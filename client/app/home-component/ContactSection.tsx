@@ -1,7 +1,7 @@
 "use client";
 
 import { FaArrowRight} from "react-icons/fa";
-import { useRouter } from "next/navigation";
+import Link from "next/link";
 interface contact {
   
   heading: string;
@@ -50,7 +50,6 @@ interface contact {
 
 }
 export default function ContactSection({contactData}:{contactData:contact}) {
-  const router = useRouter();
  
 
   return (
@@ -78,8 +77,8 @@ export default function ContactSection({contactData}:{contactData:contact}) {
             {contactData?.paragraph2}
           </p>
           <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4">
-            <button onClick={() => router.push(contactData?.getStarted?.url)} className="bg-green-500 text-white px-6 py-3 rounded-md text-lg font-semibold hover:bg-green-600 w-full md:w-auto">{contactData?.getStarted?.title}</button>
-            <button onClick={() => router.push(contactData?.ourPlans?.url)} className="bg-gray-700 text-white px-6 py-3 rounded-md text-lg font-semibold hover:bg-gray-600 w-full md:w-auto">{contactData?.ourPlans?.title}</button>
+            <Link href={`/${contactData?.getStarted?.url}`} className="bg-green-500 text-white px-6 py-3 rounded-md text-lg font-semibold hover:bg-green-600 w-full md:w-auto">{contactData?.getStarted?.title}</Link>
+            <Link href={`/${contactData?.ourPlans?.url}`} className="bg-gray-700 text-white px-6 py-3 rounded-md text-lg font-semibold hover:bg-gray-600 w-full md:w-auto">{contactData?.ourPlans?.title}</Link>
           </div>
         </div>
       </div>
@@ -94,12 +93,12 @@ export default function ContactSection({contactData}:{contactData:contact}) {
             </div> 
               <h3 className="text-xl font-bold mt-4">{contactData?.card1?.heading}</h3>
               <p className="text-gray-600 mt-2">{contactData?.card1?.description}</p>
-              <button 
-                onClick={() => router.push(contactData?.card1?.url)}  // Navigate based on the card's buttonLink
+              <Link 
+                href={`/${contactData?.card1?.url}`}  // Navigate based on the card's buttonLink
                 className="mt-4 bg-gray-700 text-white px-4 py-2 rounded-md hover:bg-gray-600"
               >
                 <FaArrowRight />
-              </button>
+              </Link>
             </div>
             <div className="w-80 bg-white p-6 flex justify-center rounded-lg text-black shadow-lg border-t-4 border-green-500 flex flex-col items-center text-center snap-center flex-shrink-0">
             <div className="text-4xl">
@@ -107,12 +106,12 @@ export default function ContactSection({contactData}:{contactData:contact}) {
             </div> 
               <h3 className="text-xl font-bold mt-4">{contactData?.card2?.heading}</h3>
               <p className="text-gray-600 mt-2">{contactData?.card2?.description}</p>
-              <button 
-                onClick={() => router.push(contactData?.card2?.url)}  // Navigate based on the card's buttonLink
+              <Link 
+                href={`/${contactData?.card2?.url}`}  // Navigate based on the card's buttonLink
                 className="mt-4 bg-gray-700 text-white px-4 py-2 rounded-md hover:bg-gray-600"
               >
                 <FaArrowRight />
-              </button>
+              </Link>
             </div>
             <div className="w-80 bg-white p-6 flex justify-center rounded-lg text-black shadow-lg border-t-4 border-green-500 flex flex-col items-center text-center snap-center flex-shrink-0">
             <div className="text-4xl">
@@ -120,12 +119,12 @@ export default function ContactSection({contactData}:{contactData:contact}) {
             </div> 
               <h3 className="text-xl font-bold mt-4">{contactData?.card3?.heading}</h3>
               <p className="text-gray-600 mt-2">{contactData?.card3?.description}</p>
-              <button 
-                onClick={() => router.push(contactData?.card3?.url)}  // Navigate based on the card's buttonLink
+              <Link 
+                href={`/${contactData?.card3?.url}`}  // Navigate based on the card's buttonLink
                 className="mt-4 bg-gray-700 text-white px-4 py-2 rounded-md hover:bg-gray-600"
               >
                 <FaArrowRight />
-              </button>
+              </Link>
             </div>
             <div className="w-80 bg-white p-6 flex justify-center rounded-lg text-black shadow-lg border-t-4 border-green-500 flex flex-col items-center text-center snap-center flex-shrink-0">
             <div className="text-4xl">
@@ -133,12 +132,12 @@ export default function ContactSection({contactData}:{contactData:contact}) {
             </div> 
               <h3 className="text-xl font-bold mt-4">{contactData?.card4?.heading}</h3>
               <p className="text-gray-600 mt-2">{contactData?.card4?.description}</p>
-              <button 
-                onClick={() => router.push(contactData?.card4?.url)}  // Navigate based on the card's buttonLink
+              <Link 
+                href={`/${contactData?.card4?.url}`}  // Navigate based on the card's buttonLink
                 className="mt-4 bg-gray-700 text-white px-4 py-2 rounded-md hover:bg-gray-600"
               >
                 <FaArrowRight />
-              </button>
+              </Link>
             </div>
         </div>
       </div>

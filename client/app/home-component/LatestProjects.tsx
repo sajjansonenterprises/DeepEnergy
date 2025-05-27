@@ -2,8 +2,8 @@
 
 import { FaArrowRight } from "react-icons/fa";
 import { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
 import Image from "next/image";
+import Link from "next/link";
 
 interface project {
   heading: string;
@@ -22,7 +22,6 @@ export default function LatestProjects({projectData}:{projectData:project}) {
   const projects=projectData?.projects
   
   const limitedProjects = projects?.slice(0, 6) || []; // ✅ Limit to 6 projects
-const router=useRouter()
   const [currentSlide, setCurrentSlide] = useState(0);
   const [slidesPerView, setSlidesPerView] = useState(3);
 
@@ -99,9 +98,9 @@ const router=useRouter()
                       </span>
                       <h3 className="text-xl font-bold mt-2">{project.heading}</h3>
                       <p className="text-gray-600 mt-2">{project.description}</p>
-                      <button onClick={()=>router.push(`project/${project.slug}`)} className="mt-4 flex items-center bg-gray-700 text-white px-4 py-2 rounded-md hover:bg-gray-600">
+                      <Link href={`/project/${project.slug}`} className="mt-4 flex items-center bg-gray-700 text-white px-4 py-2 rounded-md hover:bg-gray-600">
                         Explore More <FaArrowRight className="ml-2" />
-                      </button>
+                      </Link>
                     </div>
                   ))}
               </div>

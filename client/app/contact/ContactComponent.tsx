@@ -1,11 +1,10 @@
 "use client";
 
 import { FaGlobe, FaPhone, FaEnvelope, FaMapMarkerAlt } from "react-icons/fa";
-import Navbar from "../home-component/Navbar";
 import ContactForm from "../formComponent/ContactForm";
 import { usePageData } from "@/context/pageContext/PageContext";
-import { useRouter } from "next/navigation";
 import Preloader from "../ucomponent/Preloader";
+import Link from "next/link";
 interface Contact{
 card:{
   background:{url:string}
@@ -27,7 +26,6 @@ LocationUrl:string;
 }
 export default function ContactComponent({contactData}:{contactData:Contact}) {
   const { serverurl } = usePageData(); // ✅ Get the base URL
-const router=useRouter()
 
   const fields = [
     { name: "Name", type: "text", placeholder: "Full Name", required: true },
@@ -67,7 +65,6 @@ const router=useRouter()
   };
   return (
    <> {contactData?(<div className="relative w-full min-h-screen">
-      <Navbar />
 
       {/* Map Section */}
       <div className="relative w-full h-[500px]">
@@ -96,9 +93,9 @@ const router=useRouter()
             <h3 className="text-2xl font-bold text-white">{contactData?.card?.heading || "Connect with Us"}</h3>
             <p className="text-white mt-4">{contactData?.card?.paragraph1}</p>
             <p className="text-white mt-2">{contactData?.card?.paragraph2}</p>
-            <button onClick={()=>router.push(`${contactData?.card?.link?.url}`)} className="mt-4 flex items-center bg-white text-green-500 px-6 py-2 rounded-md font-semibold hover:bg-gray-200">
+            <Link href={`${contactData?.card?.link?.url}`} className="mt-4 flex items-center bg-white text-green-500 px-6 py-2 rounded-md font-semibold hover:bg-gray-200">
               <FaGlobe className="mr-2" /> {contactData?.card?.link?.label}
-            </button>
+            </Link>
             <div className="mt-6 text-white">
               <p>
                 <FaPhone className="inline mr-2" /> +91 {contactData?.card?.phoneNumber || "9999665619"}

@@ -1,6 +1,5 @@
 "use client"
 import { FaHome, FaCheck, FaBullseye, FaRegLightbulb, FaPlay } from "react-icons/fa";
-import Navbar from "../home-component/Navbar";
 
 import Image from "next/image";
 
@@ -38,8 +37,7 @@ const router=useRouter()
   return (
    <>{aboutData&&aboutData?.breadcrumb?.bg_image?.url?( <div>
 
-      
-      <Navbar />
+
 
       {/* Breadcrumb Section */}
       <div

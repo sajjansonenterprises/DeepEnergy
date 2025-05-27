@@ -8,10 +8,10 @@ import {
  
 } from "react-icons/fa";
 import { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { IconDefinition } from "@fortawesome/fontawesome-svg-core";
 import { faCheck,faIndustry, faBullseye, faLightbulb, faPlay, faChargingStation, faSeedling, faRecycle, faWrench, faFaceSmile, } from "@fortawesome/free-solid-svg-icons";
+import Link from "next/link";
 
 // Icon Mapping
 const iconMapping: Record<string, IconDefinition> = {
@@ -49,7 +49,6 @@ service_category:{
 
 }
 export default function ServiceSection({serviceData}:{serviceData:service}) {
-  const router = useRouter();
 
   const services=serviceData?.services
 
@@ -145,13 +144,13 @@ export default function ServiceSection({serviceData}:{serviceData:service}) {
                       
                       </ul>
                       
-                      <button
-                        onClick={() => router.push(`/service-category/${service.service_category.slug}`)}  // Dynamically navigate to the service page using the slug
+                      <Link
+                        href={`/service-category/${service.service_category.slug}`}  // Dynamically navigate to the service page using the slug
                         className="mt-4 bg-gray-700 text-white px-4 py-2 rounded-md hover:bg-gray-600"
                       >
                   
                         Read More
-                      </button>
+                      </Link>
                     </div>
                   ))}
               </div>

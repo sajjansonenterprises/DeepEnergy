@@ -1,7 +1,6 @@
 "use client";
 import { useState } from "react";
 import { FaHome, FaArrowLeft, FaArrowRight, FaLeaf, FaSolarPanel, FaIndustry } from "react-icons/fa";
-import Navbar from "../home-component/Navbar";
 import ContactSection from "../home-component/ContactSection";
 import QuoteSection from "../home-component/QuoteSection";
 import Image from "next/image";
@@ -110,7 +109,17 @@ interface quote{
 
 
 }
-export default function ServiceComponent({contactData,Quote,serviceData,services1}:{contactData:contact; Quote:quote;serviceData:servicepage; services1:Service[]}) {
+interface Testimonial{
+  testimonials:{
+   feedback:string
+   profilePic:{url:string}
+  }[];
+  Heading:string;
+  title:string;
+  ExpYear:string;
+  image:{formats:{medium:{url:string}}}
+}
+export default function ServiceComponent({contactData,Quote,serviceData,services1,testimonialsData}:{contactData:contact; Quote:quote;serviceData:servicepage; services1:Service[]; testimonialsData:Testimonial}) {
   // Pagination State
   const [currentPage, setCurrentPage] = useState(1);
   const servicesPerPage = 6;
@@ -129,8 +138,7 @@ const router=useRouter()
   return (
   <> 
    {currentServices.length>0&&serviceData?(<div>
-      <Navbar />
-
+    
       {/* Header Section */}
       <div
         className="relative w-full h-[650px] bg-cover bg-center flex items-center px-6 md:px-20"
@@ -250,7 +258,7 @@ const router=useRouter()
 
       <ContactSection contactData={contactData} />
       <QuoteSection Quote={Quote} />
-      <ExperienceTestimonials />
+      <ExperienceTestimonials testimonialsData={testimonialsData}/>
     </div>):(<Preloader/>)}
     </>
   );

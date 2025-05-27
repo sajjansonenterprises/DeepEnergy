@@ -1,7 +1,6 @@
 "use client";
 
 import { FaHome, FaLinkedin, FaTwitter, FaFacebook } from "react-icons/fa";
-import Navbar from "../home-component/Navbar";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import Preloader from "../ucomponent/Preloader";
@@ -39,8 +38,7 @@ export default function TeamComponent({teamData}:{teamData:Team}) {
 
   return (
   <div>{  teamData?(<div>
-      <Navbar />
-      
+
       {/* Breadcrumb Section */}
       <div className="relative w-full h-[650px] bg-cover bg-center flex items-center justify-center px-6 text-center md:text-left md:justify-start" 
         style={{ backgroundImage: "url('https://images.pexels.com/photos/3184306/pexels-photo-3184306.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1')", backgroundColor: "rgb(27 26 26 / 68%)", backgroundBlendMode: "overlay" }}>

@@ -2,8 +2,8 @@
 
 import { FaArrowRight } from "react-icons/fa";
 import { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
 import Image from "next/image";
+import Link from "next/link";
 
 interface article{
   heading: string;
@@ -24,7 +24,6 @@ blogs:[{slug: string;
 export default function ArticleSection({articleData}:{articleData:article}) {
 
  const blogs=articleData?.blogs ||[]
-  const router = useRouter();
   const [currentSlide, setCurrentSlide] = useState<number>(0);
   const [slidesPerView, setSlidesPerView] = useState<number>(3);
 
@@ -103,12 +102,12 @@ export default function ArticleSection({articleData}:{articleData:article}) {
                         <p className="text-gray-600 mb-4">{blog.description.slice(0, 100)}...</p>
 
                         {/* Read More Button */}
-                        <button
-                          onClick={() => router.push(`/blog/${blog.slug}`)}
+                        <Link
+                          href={`/blog/${blog.slug}`}
                           className="mt-auto flex items-center bg-gray-700 text-white px-4 py-2 rounded-md hover:bg-gray-600"
                         >
                           Read More <FaArrowRight className="ml-2" />
-                        </button>
+                        </Link>
                       </div>
                     ))}
                 </div>

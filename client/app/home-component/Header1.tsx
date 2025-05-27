@@ -2,7 +2,7 @@
 
 import { FaBolt, FaArrowRight, FaLeaf, FaSolarPanel, FaChevronLeft, FaChevronRight, FaIndustry } from "react-icons/fa";
 import { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 interface slide {
   heading:string;
@@ -14,7 +14,6 @@ interface slide {
     formats:{large:{url:string}}}
 }
 export default function Header1({headerData}:{headerData:[]}) {
-  const router =useRouter()
 
 const [currentSlide, setCurrentSlide] = useState(0);
 const [slides, setSlides] = useState<slide[]>([]); // Replace 'any' with your specific type if available
@@ -55,7 +54,7 @@ useEffect(() => {
               <FaBolt className="text-2xl md:text-4xl" />
               <FaLeaf className="text-2xl md:text-4xl" />
               <FaSolarPanel className="text-3xl" />
-              <button onClick={()=>router.push("/service")} className="bg-[#32c36c] px-4 py-3 md:px-4 md:py-5 text-sm md:text-1xl rounded-md text-white uppercase hover:bg-green-700">Our Services</button>
+              <Link href="/service" className="bg-[#32c36c] px-4 py-3 md:px-4 md:py-5 text-sm md:text-1xl rounded-md text-white uppercase hover:bg-green-700">Our Services</Link>
             </div>
           </div>
           
@@ -65,7 +64,7 @@ useEffect(() => {
             <h3 className="text-lg font-bold">Our Mission</h3>
             <p className="text-sm px-2 md:px-4 mt-2">{slide.ourMission}</p>
             <div className="flex justify-center mt-4">
-              <button onClick={()=>router.push("/about")} className="text-white px-2 py-2 bg-green-500 text-lg md:text-2xl hover:underline rounded-full"> <FaArrowRight/></button>
+              <Link href="/about" className="text-white px-2 py-2 bg-green-500 text-lg md:text-2xl hover:underline rounded-full"> <FaArrowRight/></Link>
             </div>
           </div>
         </div>

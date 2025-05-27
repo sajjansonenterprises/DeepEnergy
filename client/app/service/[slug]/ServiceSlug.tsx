@@ -3,14 +3,13 @@
 import { useState, useEffect } from "react";
 import { useParams } from "next/navigation";
 import { FaHome, FaCheck, FaPhone, FaEnvelope, FaMapMarkerAlt } from "react-icons/fa";
-import Navbar from "../../home-component/Navbar";
 import BrandSection from "../../home-component/BrandSection";
 import QuoteSection from "../../home-component/QuoteSection";
 import Image from "next/image";
 import ReactMarkdown from 'react-markdown';
 import rehypeRaw from "rehype-raw";
 import Preloader from "@/app/ucomponent/Preloader";
-import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 // Define the types for service and category data
 interface Service {
@@ -68,7 +67,6 @@ export default function ServiceSlug({slugBackground,services1, categories,brandD
   const params = useParams(); // ✅ Fix Next.js 14 issue
   const [service, setService] = useState<Service | null>(null);
   const [loading, setLoading] = useState(true);
-  const router=useRouter()
 
   // Fetch Service Data from Context API
   useEffect(() => {
@@ -88,23 +86,22 @@ export default function ServiceSlug({slugBackground,services1, categories,brandD
       <div className="text-center py-20">
         <h1 className="text-3xl font-bold">Service Not Found</h1>
         <p className="text-gray-500">{`We couldn't find the service you were looking for.`}</p>
-        <button onClick={()=>router.push("/service")} className="mt-6 bg-green-500 text-white px-6 py-3 rounded-md text-lg font-semibold hover:bg-green-600">
+        <Link href="/service" className="mt-6 bg-green-500 text-white px-6 py-3 rounded-md text-lg font-semibold hover:bg-green-600">
           Back to Services
-        </button>
+        </Link>
       </div>
     );
   }
 
   return (
     <div>
-      <Navbar />
 
       {/* Breadcrumb Section */}
       <div className="relative w-full h-[500px] bg-cover bg-center flex items-center px-6 md:px-20"
         style={{ backgroundImage: `url(${slugBackground})`, backgroundColor: "rgb(27 26 26 / 28%)", backgroundBlendMode: "overlay" }}>
         <div className="absolute top-5 left-5 text-white text-sm flex items-center">
           <FaHome className="mr-2" />
-          <button onClick={()=>router.push("/")} className="hover:underline">Home</button>
+          <Link href="/" className="hover:underline">Home</Link>
           <span className="mx-2">/</span>
           <span className="text-gray-300">Services</span>
           <span className="mx-2">/</span>
@@ -162,7 +159,7 @@ export default function ServiceSlug({slugBackground,services1, categories,brandD
                   ${service.service_categories?.find(s => s.categoryName === category.categoryName) ? "bg-green-500 text-white" : "bg-gray-100 hover:bg-gray-200"}`}
                 >
                   <FaCheck />
-                  <button onClick={()=>router.push(`/service-category/${category.slug}`)} className="ml-3">{category.categoryName}</button>
+                  <Link href={`/service-category/${category.slug}`} className="ml-3">{category.categoryName}</Link>
                 </li>
               ))}
             </ul>

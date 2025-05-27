@@ -1,12 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import { useProjects } from "@/context/projectContext/ProjectContext";
 import { FaArrowRight } from "react-icons/fa";
-import Navbar from "../home-component/Navbar";
-import { useRouter } from "next/navigation";
 import Image from "next/image";
 import Preloader from "../ucomponent/Preloader";
+import Link from "next/link";
 interface project{
     BreadCrumb:{
         Title:string;
@@ -16,9 +14,19 @@ interface project{
         description:string
     }
 }
-export default function ProjectComponent({projectData}:{projectData:project}) {
-  const router = useRouter();
-  const { projects } = useProjects();
+
+interface ProjectData {
+  slug: string;
+  title: string;
+  heading: string;
+  description: string;
+  content: string;
+  image: { formats: { small: { url: string }; large: { url: string } };
+  alternativeText:string };
+}
+
+export default function ProjectComponent({projectData,projects}:{projectData:project; projects:ProjectData[]}) {
+
   const [visibleProjects, setVisibleProjects] = useState(6); // Show 6 initially
 
 
@@ -34,7 +42,7 @@ export default function ProjectComponent({projectData}:{projectData:project}) {
   return (
     <>
    {projectData&&projects.length>0?( <div>
-      <Navbar />
+
       <div className="relative">
         {/* Background Image */}
         <div
@@ -52,11 +60,11 @@ export default function ProjectComponent({projectData}:{projectData:project}) {
           <nav className="text-sm mb-6">
             <ul className="flex justify-center space-x-2">
               <li>
-                <button onClick={()=>router.push("/")} className="hover:text-green-500">Home</button>
+                <Link href="/" className="hover:text-green-500">Home</Link>
               </li>
               <li>/</li>
               <li>
-                <button onClick={()=>router.push("/projects")} className="text-green-500">Project</button>
+                <Link href="/projects" className="text-green-500">Project</Link>
               </li>
             </ul>
           </nav>
@@ -100,12 +108,12 @@ export default function ProjectComponent({projectData}:{projectData:project}) {
               <h3 className="text-xl font-bold mt-2">{project.heading}</h3>
               
               <p className="text-gray-600 mt-2">{project.description}</p>
-              <button
-                onClick={() => router.push(`/project/${project.slug}`)}
+              <Link
+               href={`/project/${project.slug}`}
                 className="mt-4 flex items-center bg-gray-700 text-white px-4 py-2 rounded-md hover:bg-gray-600"
               >
                 Explore More <FaArrowRight className="ml-2" />
-              </button>
+              </Link>
             </div>
           ))}
         </div>

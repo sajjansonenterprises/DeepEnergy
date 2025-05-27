@@ -21,12 +21,19 @@ const getServiceCatagoryPageData=async(resolvedParams:{slug:string})=>{
       next: { revalidate: 60 },
     }
          );
+   const testimonialDataRes = await fetch(`${process.env.serverurl}/api/service-page?populate[ExperienceAndTestimonial][populate][testimonials][populate]=*&populate[ExperienceAndTestimonial][populate][image][populate]=*`,
+              {
+      next: { revalidate: 60 },
+    }
+         );
+
+  const testimonialData = await testimonialDataRes.json();
 
   const serviceCategoryPageData= await resCategoryServicePage.json()
   const servicesData= await servicesRes.json()
   const homedata= await homeRes.json()
 
-  return {serviceCategoryPageData, servicesData,homedata}
+  return {serviceCategoryPageData, servicesData,homedata,testimonialData}
 }
 export default async function ServicePage({
   params,
@@ -35,8 +42,7 @@ export default async function ServicePage({
 }) {
   const resolvedParams: { slug: string } = await params;
 const Data = await getServiceCatagoryPageData(resolvedParams)
-console.log(Data?.servicesData)
   return (
-    <div><ServiceComponent serviceData={Data?.serviceCategoryPageData?.data} services1={Data?.servicesData?.data} contactData={Data?.homedata?.data?.Home?.Contact} Quote={Data?.homedata?.data?.Home?.Quote}/></div>
+    <div><ServiceComponent testimonialsData={Data?.testimonialData?.data?.ExperienceAndTestimonial} serviceData={Data?.serviceCategoryPageData?.data} services1={Data?.servicesData?.data} contactData={Data?.homedata?.data?.Home?.Contact} Quote={Data?.homedata?.data?.Home?.Quote}/></div>
   )
 }

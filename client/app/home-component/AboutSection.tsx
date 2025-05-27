@@ -1,8 +1,8 @@
 "use client";
 
-import { useRouter } from "next/navigation";
 import { FaPlug, FaArrowRight } from "react-icons/fa";
 import Image from "next/image";
+import Link from "next/link";
 
 
 interface about {
@@ -21,8 +21,7 @@ interface about {
 }
 
 export default function AboutSection({aboutData}:{aboutData:about}) {
-  const router = useRouter();
- 
+
   // Initialize state as about or null, not about | object
 
 
@@ -86,12 +85,12 @@ export default function AboutSection({aboutData}:{aboutData:about}) {
               </div>
             </div>
 
-            <button
-              onClick={() => router.push(aboutData.readMoreUrl)}
+            <Link
+              href={`/${aboutData.readMoreUrl}`}
               className="mt-6 flex items-center justify-center md:justify-start bg-green-500 text-white px-6 py-3 rounded-md text-lg font-semibold hover:bg-green-600"
             >
               Read More <FaArrowRight className="ml-3" />
-            </button>
+            </Link>
           </div>
         </div>
       ) : (
